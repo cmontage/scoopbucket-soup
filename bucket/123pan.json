@@ -40,6 +40,6 @@
         "regex": "(.*)=====(?<url>.*)"
     },
     "autoupdate": {
-        "url": "$matchUrl#/dl.7z"
+        "url": "$matchUrl#/dl.7z" 
     }
 }
