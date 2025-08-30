@@ -1,0 +1,53 @@
+{
+    "version": "7.40.6",
+    "homepage": "https://feishu.cn/",
+    "description": "新一代知识管理平台",
+    "license": {
+        "identifier": "EULA",
+        "url": "https://feishu.cn/en/terms"
+    },
+    "architecture": {
+        "32bit": {
+            "url": "https://sf3-cn.feishucdn.com/obj/ee-appcenter/205ce781/Feishu-win32_ia32-7.40.6-signed.exe#/dl.7z",
+            "hash": "md5:6bf321132e83317048d4cc01e1f19138"
+        },
+        "64bit": {
+            "url": "https://sf3-cn.feishucdn.com/obj/ee-appcenter/4882b2be/Feishu-win32_x64-7.40.6-signed.exe#/dl.7z",
+            "hash": "md5:f4a773e96cf9dc683e90dc4674269b93"
+        }
+    },
+    "extract_to": "app",
+    "pre_install": [
+        "Remove-Item \"$dir\\app\\update.exe\" -Force",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Write-Host (\"\nPersisting $env:AppData\\Roaming\\LarkShell ... \") -NoNewline",
+        "New-PersistDirectory \"$env:APPDATA\\LarkShell\" \"$persist_dir\\AppData\" -Migrate"
+    ],
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Confirm-Action",
+        "Stop-App",
+        "Write-Host (\"\nDeleting $env:APPDATA\\LarkShell ... \") -f DarkGray -NoNewline",
+        "Remove-Junction \"$env:APPDATA\\LarkShell\" -ErrorAction SilentlyContinue | Out-Null"
+    ],
+    "bin": "app/Feishu.exe",
+    "shortcuts": [
+        [
+            "app/Feishu.exe",
+            "飞书"
+        ]
+    ],
+    "checkver": {
+        "url": "https://feishu.cn/api/downloads",
+        "jp": "$.versions.Windows.download_link",
+        "regex": "/(?<id>[\\d\\w]+)/Feishu-(?<arch>[\\d\\w]+)-([\\d\\.]+)\\-signed\\.exe"
+    },
+    "autoupdate": {
+        "url": "https://sf3-cn.feishucdn.com/obj/ee-appcenter/$matchId/Feishu-$matchArch-$version-signed.exe#/dl.7z",
+        "hash": {
+            "url": "https://feishu.cn/api/downloads",
+            "jp": "$.versions.Windows.hash"
+        }
+    }
+}

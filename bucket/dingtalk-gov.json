@@ -1,0 +1,49 @@
+{
+    "version": "2.9.0-34",
+    "description": "浙政钉",
+    "homepage": "https://www.ding.zj.gov.cn/pc/index.html",
+    "license": {
+        "identifier": "EULA"
+    },
+    "url": "https://gov-cdn-pro.ding.zj.gov.cn/pc/DingTalkGov_v2.9.0-Release.34.exe#/dl.7z",
+    "hash": "aa4e655866236d8ec96226f00f347f9a70ae2607b16af14b0685859e69cd9532",
+    "pre_install": [
+        "Remove-Item \"$dir\\DingTalkGovUpdater.exe\" -Force",
+        "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Write-Host (\"\nPersisting $env:AppData\\Roaming\\DingTalkGov ... \") -NoNewline",
+        "New-PersistDirectory \"$env:APPDATA\\DingTalkGov\" \"$persist_dir\\AppData\" -Migrate"
+    ],
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Confirm-Action",
+        "Stop-App",
+        "Write-Host (\"\nDeleting $env:APPDATA\\DingTalkGov ... \") -f DarkGray -NoNewline",
+        "Remove-Junction \"$env:APPDATA\\DingTalkGov\" -ErrorAction SilentlyContinue | Out-Null",
+        "Write-Host (\"\nDeleting $env:APPDATA\\DingTalkGov_91 ... \") -f DarkGray -NoNewline",
+        "Remove-Item \"$env:LOCALAPPDATA\\DingTalkGov_91\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
+        "Write-Host (\"\nDeleting $env:APPDATA\\DingTalkGov_108 ... \") -f DarkGray -NoNewline",
+        "Remove-Item \"$env:LOCALAPPDATA\\DingTalkGov_108\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
+        
+    ],
+    "shortcuts": [
+        [
+            "DingTalkGovLauncher.exe",
+            "浙政钉"
+        ]
+    ],
+    "checkver": {
+        "script": [
+            "Import-Module \"$pwd\\bin\\WinGet.psm1\"",
+            "$Manifest = Get-WinGetManifest -Id 'GovernmentOfThePRC.ZheJiangProvince.ZheZhengDing'",
+            "$version  = $Manifest.PackageVersion",
+            "$url      = $Manifest.Installers.InstallerUrl",
+            "return \"$version=====$url\""
+        ],
+        "regex": "(.*)=====(?<url>.*)"
+    },
+    "autoupdate": {
+        "url": "$matchUrl#/dl.7z"
+    }
+}
