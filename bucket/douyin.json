@@ -1,0 +1,44 @@
+{
+    "version": "5.5.0",
+    "description": "短视频社交应用程序，记录美好生活",
+    "homepage": "https://douyin.com/",
+    "license": "Proprietary",
+    "url": "https://www.douyin.com/download/pc/obj/douyin-pc-web/douyin-pc-client/7044145585217083655/releases/12292359/5.5.0/win32-ia32/douyin-v5.5.0-win32-ia32-douyin.exe#/dl.7z",
+    "hash": "631cb1179498bed357e79188e9578d08fca87cfa484a092a44dcbd13b8765468",
+    "pre_install": [
+        "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\"",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Write-Host (\"\nPersisting $env:AppData\\Roaming\\douyin ... \") -NoNewline,",
+        "New-PersistDirectory \"$env:APPDATA\\douyin\" \"$persist_dir\\AppData\" -Migrate",
+        "Remove-Item \"$dir\\app.7z\", \"$dir\\`$*\", \"$dir\\uninst*\", \"$dir\\resources\\app-update.yml\", \"$dir\\installer_downloader*\", \"$dir\\app_shell_updater*\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
+    ],
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Confirm-Action",
+        "Stop-App",
+        "Write-Host (\"\nDeleting $env:APPDATA\\douyin ... \") -f DarkGray -NoNewline",
+        "Remove-Junction \"$env:APPDATA\\douyin\" -ErrorAction SilentlyContinue | Out-Null"
+    ],
+    "bin": [
+        [
+            "douyin.exe",
+            "抖音"
+
+        ]
+    ],
+    "shortcuts": [
+        [
+            "douyin.exe",
+            "抖音"
+        ]
+    ],
+    "persist": "User Data",
+    "checkver": {
+        "url": "https://www.douyin.com/downloadpage/pc",
+        "regex": "/douyin-pc-client/(?<id>\\d+)/releases/(?<build>\\d+)/([\\d.]+)/win32-ia32/"
+    },
+    "autoupdate": {
+        "url": "https://www.douyin.com/download/pc/obj/douyin-pc-web/douyin-pc-client/$matchId/releases/$matchBuild/$version/win32-ia32/douyin-v$version-win32-ia32-douyin.exe#/dl.7z"
+    }
+}
