@@ -42,6 +42,13 @@ jobs:
           fi
         shell: bash
         
+      - name: Clean up git remotes before sync
+        run: |
+          # 删除可能存在的 gitee 远程仓库
+          git remote remove gitee || echo "gitee remote not found, continuing..."
+          git remote -v
+        shell: bash
+        
       - name: Mirror repo to Gitee
         uses: abersheeran/sync-gitee-mirror@v1-beta
         with:
