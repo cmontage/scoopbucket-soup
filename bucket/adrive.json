@@ -1,5 +1,5 @@
 {
-    "version": "6.8.6",
+    "version": "6.8.7",
     "description": "一款速度快、不打扰、够安全、易于分享的网盘",
     "homepage": "https://alipan.com/",
     "license": {
@@ -18,7 +18,8 @@
         "Remove-Item \"$dir\\`$TEMP\" -Force -Recurse",
         "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"\nPersisting $env:AppData\\Roaming\\aDrive ... \") -NoNewline",
+        "Write-Host (\"
+Persisting $env:AppData\\Roaming\\aDrive ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\aDrive\" \"$persist_dir\\aDrive\" -Migrate"
     ],
     "pre_uninstall": [
@@ -26,9 +27,11 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"\nDeleting $env:APPDATA\\aDrive ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\aDrive ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\aDrive\" -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:APPDATA\\utForpc ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\utForpc ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:APPDATA\\utForpc\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
     "checkver": {
