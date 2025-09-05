@@ -1,13 +1,13 @@
 {
-    "version": "4.1.36.6012",
+    "version": "5.0.0.8002",
     "description": "WeCom/WXWork/企业微信/WeChat-Work, a professional office management tool for enterprises created by Tencent",
     "homepage": "https://work.weixin.qq.com/",
     "license": {
         "identifier": "Proprietary",
         "url": "https://work.weixin.qq.com/nl/eula"
     },
-    "url": "https://dldir1.qq.com/wework/work_weixin/WeCom_4.1.36.6012.exe#/dl.7z",
-    "hash": "28dbeb80031b87f5fe3b649516b9a73397aef784a3dce544adddab60051fdabe",
+    "url": "https://dldir1.qq.com/wework/work_weixin/WeCom_5.0.0.8002.exe#/dl.7z",
+    "hash": "c329d90a0fa12e92b65310e756ad9b140ba41c67f95f129456981eadea858d5e",
     "bin": "WXWork.exe",
     "shortcuts": [
         [
@@ -19,7 +19,8 @@
         "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
         "Remove-Item \"$dir\\Uninstall.exe\" -Force -Recurse",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"\nPersisting $env:APPDATA\\Tencent\\WXWork ... \") -NoNewline",
+        "Write-Host (\"
+Persisting $env:APPDATA\\Tencent\\WXWork ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\Tencent\\WXWork\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "pre_uninstall": [
@@ -27,9 +28,11 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"\nDeleting $env:APPDATA\\VoipNNModel ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\VoipNNModel ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:AppData\\VoipNNModel\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:APPDATA\\Tencent\\WXWork ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\Tencent\\WXWork ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\Tencent\\WXWork\" -ErrorAction SilentlyContinue | Out-Null"
     ],
     "checkver": {
