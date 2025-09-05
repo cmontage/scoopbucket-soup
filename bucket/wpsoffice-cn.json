@@ -1,13 +1,13 @@
 {
-    "version": "12.1.0.21171",
+    "version": "12.1.0.22529",
     "description": "WPS Office 协同办公软件（国内版）",
     "homepage": "https://www.wps.cn",
     "license": {
         "identifier": "Freeware",
         "url": "https://www.wps.cn/privacy/useragreement"
     },
-    "url": "https://official-package.wpscdn.cn/wps/download/WPS_Setup_21171.exe#/dl.7z",
-    "hash": "e57a484b13ab5f44786a2b6f8e55250e9b6bf703d5a604ccf5f2a5ba72820989",
+    "url": "https://official-package.wpscdn.cn/wps/download/WPS_Setup_22529.exe#/dl.7z",
+    "hash": "41558248ac0be69daf4fb17e13ec53acfd7a2ebbe2004c72a0a18d16b8c0b92e",
     "pre_install": [
         "Expand-7zipArchive \"$dir\\`$_11_\\`$EXEFILE\" -Switches '-t#'",
         "Move-Item \"$dir\\`$_11_\\*.7z\" $dir",
@@ -20,12 +20,14 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"\nDeleting $env:APPDATA\\Kingsoft ... \") -f DarkGray -NoNewline",
-        "Write-Host (\"\nDeleting $env:LOCALAPPDATA\\kingsoft ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\Kingsoft ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:LOCALAPPDATA\\kingsoft ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:APPDATA\\Kingsoft\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
         "Remove-Item \"$env:LOCALAPPDATA\\kingsoft\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
-    "bin":  "wpsoffice.exe",
+    "bin": "wpsoffice.exe",
     "shortcuts": [
         [
             "wpsoffice.exe",
