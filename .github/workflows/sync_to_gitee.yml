@@ -2,7 +2,9 @@ name: Repo Sync to Gitee
 on:
   workflow_dispatch:
   schedule:
-    - cron: '5 0 * * *'
+    # 每天中国时区 00:00 和 12:00 同步 (UTC 16:00 和 04:00)
+    - cron: '0 16 * * *'  # 中国时区 00:00
+    - cron: '0 4 * * *'   # 中国时区 12:00
 env:
   # 仓库名称
   REPO_NAME: ${{ github.event.repository.name }}
