@@ -1,12 +1,12 @@
 {
-    "version": "17.2.3",
+    "version": "17.3.3",
     "description": "Database administration and development tool",
     "homepage": "https://navicat.com.cn/products/navicat-premium-lite",
     "license": "Freeware",
     "architecture": {
         "64bit": {
             "url": "https://dn.navicat.com.cn/download/navicat17_premium_lite_cs_x64.exe",
-            "hash": "db1cd035e673b70f505c5c70358df02f0dd88956df9be56f13f786f4f09892de"
+            "hash": "7a6b595472c0b820234dea7c3298556b03cc4f2e65cc051a4f1fb0898ea4ba84"
         }
     },
     "innosetup": true,
