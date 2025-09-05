@@ -1,5 +1,5 @@
 {
-    "version": "4.7.7.1",
+    "version": "4.8.1.5",
     "homepage": "https://www.todesk.com/",
     "description": "ToDesk远程桌面软件-免费安全流畅的远程连接电脑手机",
     "license": {
@@ -7,7 +7,7 @@
         "url": "https://www.todesk.com/licence.html"
     },
     "url": "https://dl.todesk.com/windows/ToDesk_Setup.exe#/dl.7z",
-    "hash": "5cb11ae8d25ef106f6dc42034f7b388990b6c85413cf4008a6f2797978bf6a7c",
+    "hash": "5417bf9816172836f0f7a9d91656994e695a3122662336a59ed7759e18310ce4",
     "pre_install": [
         "if (!(Test-Path \"$persist_dir\\config.ini\") -or !(Get-Item \"$persist_dir\\config.ini\").Length) {",
         "New-Item \"$persist_dir\\config.ini\" -ItemType File -Force -ErrorAction SilentlyContinue | Out-Null",
@@ -37,7 +37,8 @@
         "Confirm-Action",
         "Stop-App",
         "Remove-Item \"$env:LOCALAPPDATA\\ToDesk\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:LOCALAPPDATA\\ToDesk ... \") -f DarkGray -NoNewline"
+        "Write-Host (\"
+Deleting $env:LOCALAPPDATA\\ToDesk ... \") -f DarkGray -NoNewline"
     ],
     "shortcuts": [
         [
