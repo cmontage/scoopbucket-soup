@@ -1,10 +1,10 @@
 {
-    "version": "2.3.5.0",
+    "version": "2.5.3.0",
     "description": "123云盘是一款空间大、不限速、专注大文件传输分发的云存储服务产品。",
     "homepage": "https://www.123pan.com/",
     "license": "Proprietary",
-    "url": "https://app.123957.com/pc-pro/windows/235/123pan_2.3.5.exe#/dl.7z",
-    "hash": "759aa047d3bbacfc7727bee22003dc27c03eb283e9e142fa794095c4cd1e092d",
+    "url": "https://app.123957.com/pc-pro/windows/253/123pan_2.5.3.exe#/dl.7z",
+    "hash": "5388271c19f96dbe094ab5d883c9126453626735a151f0c08c50b4b5f96d1dd2",
     "shortcuts": [
         [
             "123pan.exe",
@@ -14,7 +14,8 @@
     "pre_install": [
         "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\" -Removal",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"\nPersisting $env:AppData\\Roaming\\123pan ... \") -NoNewline",
+        "Write-Host (\"
+Persisting $env:AppData\\Roaming\\123pan ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\123pan\" \"$persist_dir\\AppData\" -Migrate",
         "Remove-Item \"$dir\\`$*\" -Recurse -Force"
     ],
@@ -23,11 +24,12 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"\nDeleting $env:APPDATA\\123pan ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\123pan ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\123pan\" -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:LOCALAPPDATA\\123pan-updater ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:LOCALAPPDATA\\123pan-updater ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:LOCALAPPDATA\\123pan-updater\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
-        
     ],
     "checkver": {
         "script": [
@@ -40,6 +42,6 @@
         "regex": "(.*)=====(?<url>.*)"
     },
     "autoupdate": {
-        "url": "$matchUrl#/dl.7z" 
+        "url": "$matchUrl#/dl.7z"
     }
 }
