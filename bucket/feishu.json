@@ -1,5 +1,5 @@
 {
-    "version": "7.40.6",
+    "version": "7.50.9",
     "homepage": "https://feishu.cn/",
     "description": "新一代知识管理平台",
     "license": {
@@ -8,19 +8,20 @@
     },
     "architecture": {
         "32bit": {
-            "url": "https://sf3-cn.feishucdn.com/obj/ee-appcenter/205ce781/Feishu-win32_ia32-7.40.6-signed.exe#/dl.7z",
-            "hash": "md5:6bf321132e83317048d4cc01e1f19138"
+            "url": "https://sf3-cn.feishucdn.com/obj/ee-appcenter/7a25d3c4/Feishu-win32_ia32-7.50.9-signed.exe#/dl.7z",
+            "hash": "md5:ede3f3656acad98b7db96e4b1cf723f0"
         },
         "64bit": {
-            "url": "https://sf3-cn.feishucdn.com/obj/ee-appcenter/4882b2be/Feishu-win32_x64-7.40.6-signed.exe#/dl.7z",
-            "hash": "md5:f4a773e96cf9dc683e90dc4674269b93"
+            "url": "https://sf3-cn.feishucdn.com/obj/ee-appcenter/7a25d3c4/Feishu-win32_ia32-7.50.9-signed.exe#/dl.7z",
+            "hash": "md5:ede3f3656acad98b7db96e4b1cf723f0"
         }
     },
     "extract_to": "app",
     "pre_install": [
         "Remove-Item \"$dir\\app\\update.exe\" -Force",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"\nPersisting $env:AppData\\Roaming\\LarkShell ... \") -NoNewline",
+        "Write-Host (\"
+Persisting $env:AppData\\Roaming\\LarkShell ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\LarkShell\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "pre_uninstall": [
@@ -28,7 +29,8 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"\nDeleting $env:APPDATA\\LarkShell ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\LarkShell ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\LarkShell\" -ErrorAction SilentlyContinue | Out-Null"
     ],
     "bin": "app/Feishu.exe",
