@@ -1,5 +1,5 @@
 {
-    "version": "4.57.2025032507",
+    "version": "4.76.2025082103",
     "description": "HBuilderX，简称HX，轻如编辑器、强如IDE",
     "homepage": "https://www.dcloud.io/hbuilderx.html",
     "license": {
@@ -7,8 +7,8 @@
         "url": "https://dcloud.io/license/hbuilder.html"
     },
     "extract_dir": "HBuilderX",
-    "url": "https://download1.dcloud.net.cn/download/HBuilderX.4.57.2025032507.zip",
-    "hash": "c089a315dcbdfdae0a48d2334e699231a7a83a82a8ddf710bc0c4a56ba285eb1",
+    "url": "https://download1.dcloud.net.cn/download/HBuilderX.4.76.2025082103.zip",
+    "hash": "bc5a12e9646e3a94d74d0bfb1fff99d251940479534798b977676f1fa02f1a4a",
     "bin": [
         "HBuilderX.exe",
         [
@@ -26,7 +26,8 @@
     "pre_install": [
         "Remove-Item \"$dir\\Updater.exe\" -Force -ErrorAction SilentlyContinue | Out-Null",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"\nPersisting $env:AppData\\Roaming\\HBuilder X ... \") -NoNewline",
+        "Write-Host (\"
+Persisting $env:AppData\\Roaming\\HBuilder X ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\HBuilder X\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "pre_uninstall": [
@@ -34,9 +35,11 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"\nDeleting $env:APPDATA\\HBuilder X ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\HBuilder X ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\HBuilder X\" -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:LOCALAPPDATA\\HBuilder X ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:LOCALAPPDATA\\HBuilder X ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:LOCALAPPDATA\\HBuilder X\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
     "checkver": {
