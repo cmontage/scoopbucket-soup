@@ -1,10 +1,10 @@
 {
-    "version": "7.54.0.103",
+    "version": "7.60.5.106",
     "description": "百度网盘，百度公司推出的云存储服务",
     "homepage": "https://pan.baidu.com/download",
     "license": "Proprietary",
-    "url": "http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_7.54.0.103.exe#dl.7z",
-    "hash": "7dd445a6bfbc6bf8f12be07054b41ff92a134ed172175917d214c2aa955fe1e7",
+    "url": "http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_7.60.5.106.exe#dl.7z",
+    "hash": "eea380f7c6758cf952c8d6fa479e402c09b6845a6f0d2bf8381c9fb65732eeae",
     "bin": "BaiduNetdisk.exe",
     "shortcuts": [
         [
@@ -25,17 +25,23 @@
         "Stop-App"
     ],
     "post_uninstall": [
-        "Write-Host (\"\nDeleting $env:APPDATA\\PLogs ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\PLogs ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\PLogs\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:APPDATA\\BaiduYunKernel ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\BaiduYunKernel ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\BaiduYunKernel\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:APPDATA\\BaiduYunGuanjia ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\BaiduYunGuanjia ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\BaiduYunGuanjia\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:APPDATA\\BaiduNetdisk ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\BaiduNetdisk ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\BaiduNetdisk\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:APPDATA\\Baidu\\BaiduNetdisk ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\Baidu\\BaiduNetdisk ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\Baidu\\BaiduNetdisk\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"\nDeleting $env:APPDATA\\Baidu\\BaiduYunKernel ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"
+Deleting $env:APPDATA\\Baidu\\BaiduYunKernel ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\Baidu\\BaiduYunKernel\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
     "checkver": {
