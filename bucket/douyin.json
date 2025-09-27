@@ -8,8 +8,8 @@
     "pre_install": [
         "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\"",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"
-Persisting $env:AppData\\Roaming\\douyin ... \") -NoNewline,",
+        "Write-Host (\"",
+        "Persisting $env:AppData\\Roaming\\douyin ... \") -NoNewline,",
         "New-PersistDirectory \"$env:APPDATA\\douyin\" \"$persist_dir\\AppData\" -Migrate",
         "Remove-Item \"$dir\\app.7z\", \"$dir\\`$*\", \"$dir\\uninst*\", \"$dir\\resources\\app-update.yml\", \"$dir\\installer_downloader*\", \"$dir\\app_shell_updater*\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
@@ -18,8 +18,8 @@ Persisting $env:AppData\\Roaming\\douyin ... \") -NoNewline,",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"
-Deleting $env:APPDATA\\douyin ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"",
+        "Deleting $env:APPDATA\\douyin ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\douyin\" -ErrorAction SilentlyContinue | Out-Null"
     ],
     "bin": [
