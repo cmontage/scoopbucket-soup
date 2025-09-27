@@ -48,9 +48,9 @@
         "script": [
             "if ($cmd -eq 'uninstall') {",
             "    Remove-Item -Path \"$([Environment]::GetFolderPath('CommonDocuments'))\\Tencent\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
-            "    Write-Host (\"\nDeleting $env:APPDATA\\QQ ... \") -f DarkGray -NoNewline",
+            "    Write-Host \"`nDeleting $env:APPDATA\\QQ ... \" -f DarkGray -NoNewline",
             "    Remove-Item -Path \"$env:APPDATA\\QQ\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
-            "    Write-Host (\"\nDeleting $env:APPDATA\\Tencent\\qimei ... \") -f DarkGray -NoNewline",
+            "    Write-Host \"`nDeleting $env:APPDATA\\Tencent\\qimei ... \" -f DarkGray -NoNewline",
             "    Remove-Item -Path \"$env:APPDATA\\Tencent\\qimei\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
             "}"
         ]

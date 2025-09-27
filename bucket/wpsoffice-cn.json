@@ -20,10 +20,8 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"
-Deleting $env:APPDATA\\Kingsoft ... \") -f DarkGray -NoNewline",
-        "Write-Host (\"
-Deleting $env:LOCALAPPDATA\\kingsoft ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\Kingsoft ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\kingsoft ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:APPDATA\\Kingsoft\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
         "Remove-Item \"$env:LOCALAPPDATA\\kingsoft\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],

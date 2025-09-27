@@ -21,8 +21,7 @@
         "Remove-Item -Recurse -Force \"$dir\\`$*\" -ErrorAction SilentlyContinue | Out-Null",
         "Remove-Item -Force \"$dir\\WeMeetApp_new.exe\" -ErrorAction SilentlyContinue | Out-Null",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"
-Persisting $env:APPDATA\\Tencent\\WeMeet ... \") -NoNewline",
+        "Write-Host (\"`nPersisting $env:APPDATA\\Tencent\\WeMeet ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\Tencent\\WeMeet\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "pre_uninstall": [
@@ -30,14 +29,11 @@ Persisting $env:APPDATA\\Tencent\\WeMeet ... \") -NoNewline",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"
-Deleting $env:APPDATA\\Tencent\\qimei ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\Tencent\\qimei ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\Tencent\\qimei\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:APPDATA\\WeMeetApp ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\WeMeetApp ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:AppData\\WeMeetApp\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:APPDATA\\Tencent\\WeMeet ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\Tencent\\WeMeet ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\Tencent\\WeMeet\""
     ],
     "shortcuts": [

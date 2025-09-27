@@ -18,8 +18,7 @@
         "Remove-Item \"$dir\\`$TEMP\" -Force -Recurse",
         "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"
-Persisting $env:AppData\\Roaming\\aDrive ... \") -NoNewline",
+        "Write-Host (\"`nPersisting $env:AppData\\Roaming\\aDrive ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\aDrive\" \"$persist_dir\\aDrive\" -Migrate"
     ],
     "pre_uninstall": [
@@ -27,11 +26,9 @@ Persisting $env:AppData\\Roaming\\aDrive ... \") -NoNewline",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"
-Deleting $env:APPDATA\\aDrive ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\aDrive ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\aDrive\" -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:APPDATA\\utForpc ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\utForpc ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:APPDATA\\utForpc\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
     "checkver": {

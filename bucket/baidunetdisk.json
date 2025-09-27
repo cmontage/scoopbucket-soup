@@ -25,23 +25,17 @@
         "Stop-App"
     ],
     "post_uninstall": [
-        "Write-Host (\"
-Deleting $env:APPDATA\\PLogs ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\PLogs ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\PLogs\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:APPDATA\\BaiduYunKernel ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\BaiduYunKernel ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\BaiduYunKernel\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:APPDATA\\BaiduYunGuanjia ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\BaiduYunGuanjia ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\BaiduYunGuanjia\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:APPDATA\\BaiduNetdisk ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\BaiduNetdisk ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\BaiduNetdisk\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:APPDATA\\Baidu\\BaiduNetdisk ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\Baidu\\BaiduNetdisk ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\Baidu\\BaiduNetdisk\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:APPDATA\\Baidu\\BaiduYunKernel ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\Baidu\\BaiduYunKernel ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\Baidu\\BaiduYunKernel\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
     "checkver": {

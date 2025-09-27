@@ -26,8 +26,7 @@
     "pre_install": [
         "Remove-Item \"$dir\\Updater.exe\" -Force -ErrorAction SilentlyContinue | Out-Null",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"
-Persisting $env:AppData\\Roaming\\HBuilder X ... \") -NoNewline",
+        "Write-Host (\"`nPersisting $env:AppData\\Roaming\\HBuilder X ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\HBuilder X\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "pre_uninstall": [
@@ -35,11 +34,9 @@ Persisting $env:AppData\\Roaming\\HBuilder X ... \") -NoNewline",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"
-Deleting $env:APPDATA\\HBuilder X ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\HBuilder X ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\HBuilder X\" -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:LOCALAPPDATA\\HBuilder X ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\HBuilder X ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:LOCALAPPDATA\\HBuilder X\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
     "checkver": {

@@ -6,20 +6,19 @@
     "url": "https://www.douyin.com/download/pc/obj/douyin-pc-web/douyin-pc-client/7044145585217083655/releases/214811301/6.6.1/win32-ia32/douyin-v6.6.1-win32-ia32-douyin.exe#/dl.7z",
     "hash": "ecd9b42b7aefc27a0c8ba5e008983c6e19fee38af7b9180f2b3a1e813ae8dd36",
     "pre_install": [
-        "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\"",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"",
-        "Persisting $env:AppData\\Roaming\\douyin ... \") -NoNewline,",
+        "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\\$version\" -Removal",
+        "Write-Host (\"`nPersisting $env:AppData\\Roaming\\douyin ... \") -NoNewline,",
         "New-PersistDirectory \"$env:APPDATA\\douyin\" \"$persist_dir\\AppData\" -Migrate",
-        "Remove-Item \"$dir\\app.7z\", \"$dir\\`$*\", \"$dir\\uninst*\", \"$dir\\resources\\app-update.yml\", \"$dir\\installer_downloader*\", \"$dir\\app_shell_updater*\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
+        "Remove-Item \"$dir\\app.7z\", \"$dir\\`$*\", \"$dir\\uninst*\", \"$dir\\resources\\app-update.yml\", \"$dir\\installer_downloader*\", \"$dir\\app_shell_updater*\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
+        "Copy-Item \"$dir\\$version\\douyin.backup\" \"$dir\\douyin.exe\" -Force"
     ],
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"",
-        "Deleting $env:APPDATA\\douyin ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\douyin ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\douyin\" -ErrorAction SilentlyContinue | Out-Null"
     ],
     "bin": [

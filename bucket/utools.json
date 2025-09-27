@@ -21,7 +21,7 @@
     },
     "pre_install": [
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"\nPersisting $env:APPDATA\\uTools ... \") -NoNewline",
+        "Write-Host (\"`nPersisting $env:APPDATA\\uTools ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\uTools\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "post_install": "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\`$R0\" -Force -Recurse",
@@ -30,7 +30,7 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"\nDeleting $env:APPDATA\\uTools ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\uTools ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\uTools\" -ErrorAction SilentlyContinue | Out-Null"
     ],
     "shortcuts": [

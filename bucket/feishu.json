@@ -20,8 +20,7 @@
     "pre_install": [
         "Remove-Item \"$dir\\app\\update.exe\" -Force",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"
-Persisting $env:AppData\\Roaming\\LarkShell ... \") -NoNewline",
+        "Write-Host (\"Persisting $env:AppData\\Roaming\\LarkShell ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\LarkShell\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "pre_uninstall": [
@@ -29,8 +28,7 @@ Persisting $env:AppData\\Roaming\\LarkShell ... \") -NoNewline",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"
-Deleting $env:APPDATA\\LarkShell ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\LarkShell ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\LarkShell\" -ErrorAction SilentlyContinue | Out-Null"
     ],
     "bin": "app/Feishu.exe",

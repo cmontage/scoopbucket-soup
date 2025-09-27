@@ -40,5 +40,5 @@
             }
         }
     },
-    "notes": "注意：我们不会存储您的洛雪音乐助手数据，它们可能存储在 '%APPDATA%\\lx-music-desktop' 中"
+    "notes": "Scoop can't store your lx-music data, they may be stored in '%APPDATA%\\lx-music-desktop'."
 }

@@ -14,8 +14,7 @@
     "pre_install": [
         "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\" -Removal",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"
-Persisting $env:AppData\\Roaming\\123pan ... \") -NoNewline",
+        "Write-Host \"`nPersisting $env:AppData\\Roaming\\123pan ... \" -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\123pan\" \"$persist_dir\\AppData\" -Migrate",
         "Remove-Item \"$dir\\`$*\" -Recurse -Force"
     ],
@@ -24,11 +23,9 @@ Persisting $env:AppData\\Roaming\\123pan ... \") -NoNewline",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"
-Deleting $env:APPDATA\\123pan ... \") -f DarkGray -NoNewline",
+        "Write-Host \"`nDeleting $env:APPDATA\\123pan ... \" -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\123pan\" -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:LOCALAPPDATA\\123pan-updater ... \") -f DarkGray -NoNewline",
+        "Write-Host \"`nDeleting $env:LOCALAPPDATA\\123pan-updater ... \" -f DarkGray -NoNewline",
         "Remove-Item \"$env:LOCALAPPDATA\\123pan-updater\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
     "checkver": {

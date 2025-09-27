@@ -20,7 +20,7 @@
         "Get-ChildItem \"$dir\\redist_packages\" | Move-Item -Destination \"$dir\" -Force",
         "Remove-Item \"$dir\\`$PLUGINSDIR\",\"$dir\\redist_packages\" -Force -Recurse",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"\nPersisting $env:LOCALAPPDATA\\Netease\\CloudMusic ... \") -NoNewline",
+        "Write-Host (\"`nPersisting $env:LOCALAPPDATA\\Netease\\CloudMusic ... \") -NoNewline",
         "New-PersistDirectory \"$env:LOCALAPPDATA\\Netease\\CloudMusic\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "pre_uninstall": [
@@ -28,7 +28,7 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"\nDeleting $env:LOCALAPPDATA\\Netease\\CloudMusic ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\Netease\\CloudMusic ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:LOCALAPPDATA\\Netease\\CloudMusic\" -ErrorAction SilentlyContinue | Out-Null"
     ],
     "bin": "cloudmusic.exe",

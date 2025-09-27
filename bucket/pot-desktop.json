@@ -19,11 +19,9 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Confirm-Action",
         "Stop-App",
-        "Write-Host (\"
-Deleting $env:LOCALAPPDATA\\com.pot-app.desktop ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\com.pot-app.desktop ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:LOCALAPPDATA\\com.pot-app.desktop\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:APPDATA\\com.pot-app.desktop ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:APPDATA\\com.pot-app.desktop ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:APPDATA\\com.pot-app.desktop\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
     "bin": "pot.exe",

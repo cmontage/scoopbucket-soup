@@ -36,7 +36,7 @@
         "url": "https://webcdn.m.qq.com/spcmgr/download/TIM$version.exe#/dl.exe"
     },
     "notes": [
-        "Scoop doesn't persist your TIM data, by default they are stored in: %UserProfile%\\Documents\\Tencent Files'. \n Scoop 不会保留您的 TIM 数据，默认情况下它们存储在：'%UserProfile%\\Documents\\Tencent Files'",
-        "Files produced at runtime leaves in '%AppData%\\Tencent'. \n 运行时产生的文件存储在 '%AppData%\\Tencent'"
+        "Scoop doesn't persist your TIM data, by default they are stored in: '%UserProfile%\\Documents\\Tencent Files'.",
+        "Files produced at runtime leaves in '%AppData%\\Tencent'."
     ]
 }

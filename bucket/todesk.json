@@ -37,8 +37,7 @@
         "Confirm-Action",
         "Stop-App",
         "Remove-Item \"$env:LOCALAPPDATA\\ToDesk\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"
-Deleting $env:LOCALAPPDATA\\ToDesk ... \") -f DarkGray -NoNewline"
+        "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\ToDesk ... \") -f DarkGray -NoNewline"
     ],
     "shortcuts": [
         [

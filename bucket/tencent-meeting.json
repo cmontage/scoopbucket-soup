@@ -35,7 +35,6 @@
         "url": "https://updatecdn.meeting.qq.com/cos/$matchHash/TencentMeeting_0300000000_$version_x86_64.publish.officialwebsite.exe#/dl.7z"
     },
     "notes": [
-        "We don't persist your Tencent Meeting data, they are still storaged in \"$env:APPDATA\\Tencent\\WeMeet\".",
-        "我们不会持久化您的腾讯会议数据，它们仍存储在 \"$env:APPDATA\\Tencent\\WeMeet\"."
+        "Scoop don't persist your Tencent Meeting data, they are still storaged in \"$env:APPDATA\\Tencent\\WeMeet\"."
     ]
 }
