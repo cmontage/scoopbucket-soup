@@ -1,13 +1,13 @@
 {
-    "version": "4.8.1.5",
+    "version": "4.8.2.2",
     "homepage": "https://www.todesk.com/",
     "description": "ToDesk远程桌面软件-免费安全流畅的远程连接电脑手机",
     "license": {
         "identifier": "Proprietary",
         "url": "https://www.todesk.com/licence.html"
     },
-    "url": "https://dl.todesk.com/irrigation/ToDesk_4.8.1.5.exe#/dl.7z",
-    "hash": "c4fe669c79f3f0a214366615956aafaf8ed062b7a6084d3aa7ac2a2cd04f52a0",
+    "url": "https://dl.todesk.com/irrigation/ToDesk_4.8.2.2.exe#/dl.7z",
+    "hash": "59eac82e87f68a68bcb2b93dbd66c87b3c6bd91dd4aacf5d1baac7aa678454e9",
     "pre_install": [
         "if (!(Test-Path \"$persist_dir\\config.ini\") -or !(Get-Item \"$persist_dir\\config.ini\").Length) {",
         "New-Item \"$persist_dir\\config.ini\" -ItemType File -Force -ErrorAction SilentlyContinue | Out-Null",
