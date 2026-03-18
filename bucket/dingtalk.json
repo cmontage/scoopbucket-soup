@@ -54,9 +54,9 @@
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalk ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\DingTalk\" -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalk_108 ... \") -f DarkGray -NoNewline",
-        "Remove-Item \"$env:LOCALAPPDATA\\DingTalk_108\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Nul",
+        "Remove-Item \"$env:LOCALAPPDATA\\DingTalk_108\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalk_91 ... \") -f DarkGray -NoNewline",
-        "Remove-Item \"$env:LOCALAPPDATA\\DingTalk_91\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Nul"
+        "Remove-Item \"$env:LOCALAPPDATA\\DingTalk_91\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
     ],
     "post_uninstall": [
         "if ($global) {",
