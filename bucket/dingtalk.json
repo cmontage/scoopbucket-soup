@@ -1,13 +1,13 @@
 {
-    "version": "7.6.15.101210804",
+    "version": "8.2.13.260209001",
     "description": "钉钉，企业协作与办公沟通平台。",
     "homepage": "https://www.dingtalk.com/",
     "license": {
         "identifier": "EULA",
         "url": "https://tms.dingtalk.com/markets/dingtalk/service-terms-zh"
     },
-    "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_installer/Release/DingTalk_v7.6.15.101210804.exe#/dl.7z",
-    "hash": "335e40e0d63aefdb78c7c0881c3a0678b61b1f9996dd9de1464f9979002d7370",
+    "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_installer/Release/overseas/DingTalk_v8.2.13.260209001.exe#/dl.7z",
+    "hash": "5f79970b981076d31a63d0833fee16b25221c5c75e4a23ad284511889fbb7005",
     "pre_install": [
         "ensure \"$dir\\main\\current\"",
         "Move-Item \"$dir\\build\\dist\\*\" \"$dir\\main\\current\" -Force",
@@ -78,15 +78,15 @@
         ]
     ],
     "checkver": {
-    "script": [
-      "$response = [System.Net.HttpWebRequest]::Create('https://www.dingtalk.com/win/d/qd=oversea?spm=a213l2.14171110.4290834532.4.63e32726MyWurc').GetResponse()",
-      "$finalUrl = $response.ResponseUri.AbsoluteUri",
-      "Write-Output $finalUrl",
-      "$response.Close()"
-    ],
-    "regex": "DingTalk_v([\\d.]+)\\.exe"
+        "script": [
+            "$response = [System.Net.HttpWebRequest]::Create('https://www.dingtalk.com/win/d/qd=oversea?spm=a213l2.14171110.4290834532.4.63e32726MyWurc').GetResponse()",
+            "$finalUrl = $response.ResponseUri.AbsoluteUri",
+            "Write-Output $finalUrl",
+            "$response.Close()"
+        ],
+        "regex": "DingTalk_v([\\d.]+)\\.exe"
     },
     "autoupdate": {
-    "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_installer/Release/overseas/DingTalk_v$version.exe#/dl.7z"
+        "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_installer/Release/overseas/DingTalk_v$version.exe#/dl.7z"
     }
 }
