@@ -1,5 +1,5 @@
 {
-    "version": "9.9.18.250401",
+    "version": "9.9.28.260311",
     "description": "QQ Windows版，全新NT架构，轻松做自己。",
     "homepage": "https://im.qq.com/pcqq/index.shtml",
     "license": {
@@ -8,16 +8,16 @@
     },
     "architecture": {
         "64bit": {
-            "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.18_250401_x64_01.exe#/dl.7z",
-            "hash": "6175896725f4f36b9d3017998b3c606161d96059cbc989f952d77af97bd6d0a4"
+            "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.28_260311_x64_01.exe#/dl.7z",
+            "hash": "6b10ed4214c90ab6db8911a62e2db99074bad659b60f712e99a6cd1869318bea"
         },
         "32bit": {
-            "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.18_250401_x86_01.exe#/dl.7z",
-            "hash": "f6ddc87d645533ab71c18e1241908b84e34a8ade2a7bf2e3d3bf5601ea76dbb7"
+            "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.28_260311_x86_01.exe#/dl.7z",
+            "hash": "365e14052a71efc73a910074f285d1032f3df2e2ef9d304621d587fe7afcde39"
         },
         "arm64": {
-            "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.18_250401_arm64_01.exe#/dl.7z",
-            "hash": "7f88f6677a10a897f9e90910ba0c7580247dcce71ec6f4d0bc434a6786dc92ae"
+            "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.28_260311_arm64_01.exe#/dl.7z",
+            "hash": "6189cdac5988bacdb0e9b003bb86a2de43a806fa643997d9653c9a3b79c3f1c7"
         }
     },
     "installer": {
