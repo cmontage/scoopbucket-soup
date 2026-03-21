@@ -1,5 +1,5 @@
 {
-    "version": "4.0.1",
+    "version": "4.1.1",
     "description": "WeFlow - 一个本地的聊天导出和年度报告应用",
     "homepage": "https://github.com/hicccc77/WeFlow",
     "license": {
@@ -8,8 +8,8 @@
     },
     "architecture": {
         "64bit": {
-            "url": "https://github.com/hicccc77/WeFlow/releases/download/v4.0.1/WeFlow-4.0.1-Setup.exe#/dl.7z",
-            "hash": "63bf0268605fc796bc857196ba67a6c36428cd10fb01230ee70f28b1ad7566c6"
+            "url": "https://github.com/hicccc77/WeFlow/releases/download/v4.1.1/WeFlow-4.1.1-Setup.exe#/dl.7z",
+            "hash": "734c0da5c2983d164b04506475d14209735e56fd6b8bac79fd8b1b6aca7c9e90"
         }
     },
     "shortcuts": [
