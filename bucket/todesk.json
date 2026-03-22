@@ -7,7 +7,7 @@
         "url": "https://www.todesk.com/licence.html"
     },
     "url": "https://dl.todesk.com/windows/ToDesk_Setup.exe#/dl.7z",
-    "hash": "74a2e675ad4e6f792d05a203cbdf15b0b1a135798564daa819280a2ef8eba901",
+    "hash": "4055f47da713ea1971eb0421489b14bb06aa7b444835406ccbb568e7b794281c",
     "pre_install": [
         "if (!(Test-Path \"$persist_dir\\config.ini\") -or !(Get-Item \"$persist_dir\\config.ini\").Length) {",
         "New-Item \"$persist_dir\\config.ini\" -ItemType File -Force -ErrorAction SilentlyContinue | Out-Null",
@@ -30,7 +30,11 @@
         "\"@ | Set-Content \"$persist_dir\\config.ini\"",
         "}"
     ],
-    "post_install": "Remove-Item \"$dir\\`$PLUGINSDIR\",\"$dir\\uninst.exe\" -Force -Recurse",
+    "installer": {
+        "script": [
+            "Expand-7zipArchive -Path \"$dir\\app64.7z\" -DestinationPath $dir"
+        ]
+    },
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
