@@ -31,7 +31,7 @@
         "Confirm-Action",
         "Stop-App",
         "Write-Host (\"`nDeleting $env:APPDATA\\weflow ... \") -f DarkGray -NoNewline",
-        "Remove-Junction \"$env:APPDATA\\weflow\""
+        "Remove-Junction \"$env:APPDATA\\weflow\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null"
     ],
     "checkver": "github",
     "autoupdate": {
