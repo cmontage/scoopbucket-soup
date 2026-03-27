@@ -37,6 +37,6 @@
         "regex": "DingTalkGov_v(?<version>[\\d.]+-Release\\.\\d+)\\.exe"
     },
     "autoupdate": {
-        "url": "https://gov-cdn-pro.ding.zj.gov.cn/pc/DingTalkGov_v$matchVersion.exe#/dl.7z"
+        "url": "https://gov-cdn-pro.ding.zj.gov.cn/pc/DingTalkGov_v$version.exe#/dl.7z"
     }
 }
