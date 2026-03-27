@@ -25,7 +25,6 @@
         "Remove-Item \"$env:LOCALAPPDATA\\DingTalkGov_91\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalkGov_108 ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:LOCALAPPDATA\\DingTalkGov_108\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
-        
     ],
     "shortcuts": [
         [
