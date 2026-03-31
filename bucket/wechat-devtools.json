@@ -15,7 +15,6 @@
     },
     "pre_install": [
         "Remove-Item -R -Path \"$dir\\`$PLUGINSDIR\" -ErrorAction SilentlyContinue | Out-Null",
-        "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host \"`nPersisting $env:APPDATA\\微信开发者工具 ... \" -NoNewline",
         "New-PersistDirectory \"$env:LOCALAPPDATA\\微信开发者工具\" \"$persist_dir\\微信开发者工具\" -Migrate"
