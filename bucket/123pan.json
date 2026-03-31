@@ -14,7 +14,7 @@
     "installer": {
         "script": [
             ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-            "Write-Host \"`nPersisting $env:AppData\\Roaming\\123pan ... \" -NoNewline",
+            "Write-Host \"`nPersisting $env:APPDATA\\123pan ... \" -NoNewline",
             "New-PersistDirectory \"$env:APPDATA\\123pan\" \"$persist_dir\\AppData\" -Migrate",
             "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\" -Removal",
             "Remove-Item \"$dir\\`$*\" -Recurse -Force"

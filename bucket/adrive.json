@@ -18,8 +18,8 @@
         "Remove-Item \"$dir\\`$TEMP\" -Force -Recurse",
         "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"`nPersisting $env:AppData\\Roaming\\aDrive ... \") -NoNewline",
-        "New-PersistDirectory \"$env:APPDATA\\aDrive\" \"$persist_dir\\aDrive\" -Migrate"
+        "Write-Host (\"`nPersisting $env:APPDATA\\aDrive ... \") -NoNewline",
+        "New-PersistDirectory \"$env:APPDATA\\aDrive\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "pre_uninstall": [
         "$bucket = $install.bucket",

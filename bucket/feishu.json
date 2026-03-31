@@ -20,7 +20,7 @@
     "pre_install": [
         "Remove-Item \"$dir\\app\\update.exe\" -Force",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"Persisting $env:AppData\\Roaming\\LarkShell ... \") -NoNewline",
+        "Write-Host (\"Persisting $env:APPDATA\\LarkShell ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\LarkShell\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "pre_uninstall": [
