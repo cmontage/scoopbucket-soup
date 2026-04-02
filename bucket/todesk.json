@@ -1,5 +1,5 @@
 {
-    "version": "4.8.5.1",
+    "version": "4.8.7.5",
     "homepage": "https://www.todesk.com/",
     "description": "ToDesk远程桌面软件-免费安全流畅的远程连接电脑手机",
     "license": {
@@ -7,7 +7,7 @@
         "url": "https://www.todesk.com/licence.html"
     },
     "url": "https://dl.todesk.com/windows/ToDesk_Setup.exe#/dl.7z",
-    "hash": "4055f47da713ea1971eb0421489b14bb06aa7b444835406ccbb568e7b794281c",
+    "hash": "5126efbb6d947e0fb2d5c847ff36755a218f34871b4c4666b4c59c9446ade7b8",
     "pre_install": [
         "if (!(Test-Path \"$persist_dir\\config.ini\") -or !(Get-Item \"$persist_dir\\config.ini\").Length) {",
         "New-Item \"$persist_dir\\config.ini\" -ItemType File -Force -ErrorAction SilentlyContinue | Out-Null",
@@ -31,9 +31,7 @@
         "}"
     ],
     "installer": {
-        "script": [
-            "Expand-7zipArchive -Path \"$dir\\app64.7z\" -DestinationPath $dir"
-        ]
+        "script": "Expand-7zipArchive -Path \"$dir\\app64.7z\" -DestinationPath $dir"
     },
     "pre_uninstall": [
         "$bucket = $install.bucket",
