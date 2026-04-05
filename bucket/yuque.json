@@ -19,6 +19,14 @@
             "Remove-Item \"$dir\\`$PLUGINSDIR\" -Recurse"
         ]
     },
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Write-Host (\"`nDeleting $env:APPDATA\\yuque-desktop ... \") -f DarkGray -NoNewline",
+        "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\yuque-desktop-updater ... \") -f DarkGray -NoNewline",
+        "Remove-Item \"$env:APPDATA\\yuque-desktop\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
+        "Remove-Item \"$env:LOCALAPPDATA\\yuque-desktop-updater\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
+    ],
     "shortcuts": [
         [
             "语雀.exe",
