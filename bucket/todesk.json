@@ -36,8 +36,6 @@
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
-        "Stop-App",
         "Remove-Item \"$env:LOCALAPPDATA\\ToDesk\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\ToDesk ... \") -f DarkGray -NoNewline"
     ],

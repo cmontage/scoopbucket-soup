@@ -22,8 +22,6 @@
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
-        "Stop-App",
         "Write-Host (\"`nDeleting $env:APPDATA\\微信开发者工具 ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\微信开发者工具\" -ErrorAction SilentlyContinue | Out-Null"
     ],

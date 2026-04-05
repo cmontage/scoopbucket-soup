@@ -26,8 +26,6 @@
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
-        "Stop-App",
         "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\Netease\\CloudMusic ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:LOCALAPPDATA\\Netease\\CloudMusic\" -ErrorAction SilentlyContinue | Out-Null"
     ],

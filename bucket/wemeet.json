@@ -27,12 +27,12 @@
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
-        "Stop-App",
         "Write-Host (\"`nDeleting $env:APPDATA\\Tencent\\qimei ... \") -f DarkGray -NoNewline",
         "Remove-Item -Path \"$env:APPDATA\\Tencent\\qimei\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host (\"`nDeleting $env:APPDATA\\WeMeetApp ... \") -f DarkGray -NoNewline",
-        "Remove-Item -Path \"$env:AppData\\WeMeetApp\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
+        "Remove-Item -Path \"$env:APPDATA\\WeMeetApp\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
+        "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\Tencent\\WeMeet ... \") -f DarkGray -NoNewline",
+        "Remove-Item \"$env:LOCALAPPDATA\\Tencent\\WeMeet\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host (\"`nDeleting $env:APPDATA\\Tencent\\WeMeet ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\Tencent\\WeMeet\""
     ],

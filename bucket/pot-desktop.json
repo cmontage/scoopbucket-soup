@@ -17,8 +17,6 @@
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
-        "Stop-App",
         "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\com.pot-app.desktop ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:LOCALAPPDATA\\com.pot-app.desktop\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host (\"`nDeleting $env:APPDATA\\com.pot-app.desktop ... \") -f DarkGray -NoNewline",

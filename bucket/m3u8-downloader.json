@@ -15,9 +15,7 @@
     },
     "pre_uninstall": [
         "$bucket = $install.bucket",
-        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
-        "Stop-App"
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\""
     ],
     "bin": "M3U8-Downloader.exe",
     "shortcuts": [

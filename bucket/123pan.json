@@ -23,8 +23,6 @@
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
-        "Stop-App",
         "Write-Host \"`nDeleting $env:APPDATA\\123pan ... \" -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\123pan\" -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host \"`nDeleting $env:LOCALAPPDATA\\123pan-updater ... \" -f DarkGray -NoNewline",

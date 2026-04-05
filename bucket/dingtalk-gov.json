@@ -17,8 +17,6 @@
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
-        "Stop-App",
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalkGov ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\DingTalkGov\" -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalkGov_91 ... \") -f DarkGray -NoNewline",

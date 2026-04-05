@@ -26,8 +26,6 @@
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
-        "Stop-App",
         "Write-Host (\"`nDeleting $env:APPDATA\\LarkShell ... \") -f DarkGray -NoNewline",
         "Remove-Junction \"$env:APPDATA\\LarkShell\" -ErrorAction SilentlyContinue | Out-Null"
     ],

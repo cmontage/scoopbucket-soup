@@ -22,9 +22,7 @@
     },
     "pre_uninstall": [
         "$bucket = $install.bucket",
-        "Stop-App",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-Action",
         "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\bililive ... \") -NoNewline",
         "Remove-Junction \"$env:LOCALAPPDATA\\bililive\" -ErrorAction SilentlyContinue | Out-Null"
     ],
