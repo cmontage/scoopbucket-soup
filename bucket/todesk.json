@@ -33,7 +33,7 @@
     "installer": {
         "script": "Expand-7zipArchive -Path \"$dir\\app64.7z\" -DestinationPath $dir"
     },
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Remove-Item \"$env:LOCALAPPDATA\\ToDesk\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",

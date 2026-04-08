@@ -25,7 +25,7 @@
         "New-PersistDirectory \"$env:APPDATA\\uTools\" \"$persist_dir\\AppData\" -Migrate"
     ],
     "post_install": "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\`$R0\" -Force -Recurse",
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nDeleting $env:APPDATA\\uTools ... \") -f DarkGray -NoNewline",

@@ -14,7 +14,7 @@
         "Write-Host (\"`nPersisting $env:APPDATA\\DingTalkGov ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\DingTalkGov\" \"$persist_dir\\AppData\" -Migrate"
     ],
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalkGov ... \") -f DarkGray -NoNewline",

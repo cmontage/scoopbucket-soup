@@ -14,7 +14,7 @@
         }
     },
     "post_install": "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\com.pot-app.desktop ... \") -f DarkGray -NoNewline",

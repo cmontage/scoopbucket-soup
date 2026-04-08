@@ -10,10 +10,6 @@
         }
     },
     "innosetup": true,
-    "pre_uninstall": [
-        "$bucket = $install.bucket",
-        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\""
-    ],
     "shortcuts": [
         [
             "navicat.exe",

@@ -20,7 +20,7 @@
             "New-PersistDirectory \"$env:LOCALAPPDATA\\bililive\" \"$persist_dir\\AppData\" -Migrate"
         ]
     },
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\bililive ... \") -NoNewline",

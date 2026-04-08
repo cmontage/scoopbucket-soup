@@ -20,7 +20,7 @@
             "Remove-Item \"$dir\\`$*\" -Recurse -Force"
         ]
     },
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host \"`nDeleting $env:APPDATA\\123pan ... \" -f DarkGray -NoNewline",

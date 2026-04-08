@@ -17,7 +17,7 @@
             "hash": "876e8f5b00100ad63dcce6059d3ac2f0dbebfea61e30356b9e55b59398a9aa5e"
         }
     },
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nDeleting $env:APPDATA\\lx-music-desktop ... \") -f DarkGray -NoNewline",

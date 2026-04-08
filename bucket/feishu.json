@@ -23,7 +23,7 @@
         "Write-Host (\"Persisting $env:APPDATA\\LarkShell ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\LarkShell\" \"$persist_dir\\AppData\" -Migrate"
     ],
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nDeleting $env:APPDATA\\LarkShell ... \") -f DarkGray -NoNewline",

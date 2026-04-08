@@ -47,6 +47,9 @@
         "reg import \"$dir\\install-dingtalk.reg\""
     ],
     "pre_uninstall": [
+        
+    ],
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalk ... \") -f DarkGray -NoNewline",
@@ -54,9 +57,7 @@
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalk_108 ... \") -f DarkGray -NoNewline",
         "Remove-Item \"$env:LOCALAPPDATA\\DingTalk_108\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
         "Write-Host (\"`nDeleting $env:APPDATA\\DingTalk_91 ... \") -f DarkGray -NoNewline",
-        "Remove-Item \"$env:LOCALAPPDATA\\DingTalk_91\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
-    ],
-    "post_uninstall": [
+        "Remove-Item \"$env:LOCALAPPDATA\\DingTalk_91\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
         "if ($global) {",
         "    $registry_scope = \"HKLM\"",
         "} else {",

@@ -22,7 +22,7 @@
         "Write-Host (\"`nPersisting $env:APPDATA\\Tencent\\WXWork ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\Tencent\\WXWork\" \"$persist_dir\\AppData\" -Migrate"
     ],
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nDeleting $env:APPDATA\\VoipNNModel ... \") -f DarkGray -NoNewline",

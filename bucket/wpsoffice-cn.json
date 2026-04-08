@@ -15,7 +15,7 @@
         "Expand-7zipArchive \"$dir\\4.7z\" -ExtractDir 'office6' -Removal",
         "Expand-7zipArchive \"$dir\\2.7z\" -ExtractDir 'CONTROL\\office6' -Overwrite 'All' -Removal"
     ],
-    "pre_uninstall": [
+    "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nDeleting $env:APPDATA\\Kingsoft ... \") -f DarkGray -NoNewline",
