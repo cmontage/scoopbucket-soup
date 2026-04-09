@@ -14,6 +14,8 @@
         }
     },
     "pre_install": [
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Confirm-ManifestEncoding",
         "Remove-Item -R -Path \"$dir\\`$PLUGINSDIR\" -ErrorAction SilentlyContinue | Out-Null",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host \"`nPersisting $env:APPDATA\\微信开发者工具 ... \" -NoNewline",

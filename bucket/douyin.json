@@ -8,6 +8,7 @@
     "installer": {
         "script": [
             ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+            "Confirm-ManifestEncoding",
             "Write-Host (\"`nPersisting $env:APPDATA\\douyin ... \") -NoNewline",
             "New-PersistDirectory \"$env:APPDATA\\douyin\" \"$persist_dir\\AppData\" -Migrate",
             "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\\$version\" -Removal",

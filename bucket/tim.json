@@ -17,6 +17,8 @@
     ],
     "installer": {
         "script": [
+            ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+            "Confirm-ManifestEncoding",
             "Expand-7zipArchive \"$dir\\$fname\" -Switches '-t*' -Removal",
             "Get-Item \"$dir\\*\" -Exclude .rsrc | Remove-Item",
             "Expand-7zipArchive \"$dir\\.rsrc\\2052\\MSI\\101\" \"$dir\" -ExtractDir 'Files'",

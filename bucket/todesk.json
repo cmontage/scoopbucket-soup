@@ -31,7 +31,11 @@
         "}"
     ],
     "installer": {
-        "script": "Expand-7zipArchive -Path \"$dir\\app64.7z\" -DestinationPath $dir"
+        "script": [
+            ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+            "Confirm-ManifestEncoding",
+            "Expand-7zipArchive -Path \"$dir\\app64.7z\" -DestinationPath $dir"
+        ]
     },
     "post_uninstall": [
         "$bucket = $install.bucket",

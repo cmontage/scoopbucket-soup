@@ -15,6 +15,8 @@
     },
     "installer": {
         "script": [
+            ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+            "Confirm-ManifestEncoding",
             "Expand-7zipArchive \"$dir\\`$PLUGINSDIR/app-64.7z\" \"$dir\" -Removal",
             "Remove-Item \"$dir\\`$PLUGINSDIR\" -Recurse"
         ]

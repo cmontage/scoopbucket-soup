@@ -17,6 +17,10 @@
             "hash": "876e8f5b00100ad63dcce6059d3ac2f0dbebfea61e30356b9e55b59398a9aa5e"
         }
     },
+    "pre_install": [
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Confirm-ManifestEncoding"
+    ],
     "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",

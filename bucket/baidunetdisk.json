@@ -14,6 +14,8 @@
     ],
     "persist": "users",
     "pre_install": [
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Confirm-ManifestEncoding",
         "Remove-Item \"$dir\\`$TEMP\" -Force -Recurse",
         "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
         "Remove-Item \"$dir\\AutoUpdate\\Autoupdate.exe\" -Force -Recurse"

@@ -16,6 +16,7 @@
         "script": [
             "Expand-InnoArchive -Path \"$dir\\$fname\" -Removal",
             ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+            "Confirm-ManifestEncoding",
             "Write-Host (\"`nPersisting $env:LOCALAPPDATA\\bililive ... \") -NoNewline",
             "New-PersistDirectory \"$env:LOCALAPPDATA\\bililive\" \"$persist_dir\\AppData\" -Migrate"
         ]

@@ -17,6 +17,8 @@
         }
     },
     "pre_install": [
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Confirm-ManifestEncoding",
         "Get-ChildItem \"$dir\\`$_*\" | Rename-Item -NewName \"$version\" -Force",
         "Remove-Item -Recurse -Force \"$dir\\`$*\" -ErrorAction SilentlyContinue | Out-Null",
         "Remove-Item -Force \"$dir\\WeMeetApp_new.exe\" -ErrorAction SilentlyContinue | Out-Null",

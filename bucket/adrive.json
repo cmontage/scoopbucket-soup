@@ -8,13 +8,9 @@
     },
     "url": "https://dorado-api.deno.dev/alipan?version=6.9.1&dl#/aDrive-6.9.1.7z",
     "hash": "cc40289de6c35821214c816b8a1101c3ada822f05c7da3b770ae432067eea76a",
-    "shortcuts": [
-        [
-            "aDrive.exe",
-            "阿里云盘"
-        ]
-    ],
     "post_install": [
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Confirm-ManifestEncoding",
         "Remove-Item \"$dir\\`$TEMP\" -Force -Recurse",
         "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
@@ -34,6 +30,12 @@
         "Get-Item 'HKU:\\*\\SOFTWARE\\Classes\\smartdrive' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue | Out-Null",
         "Get-Item 'HKU:\\*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run' -ErrorAction SilentlyContinue | Remove-ItemProperty -Name 'com.alicloud.smartdrive' -ErrorAction SilentlyContinue | Out-Null",
         "Get-Item 'HKU:\\*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\300f80e0-781e-56db-ae9d-9d0190486ca9' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue | Out-Null"
+    ],
+    "shortcuts": [
+        [
+            "aDrive.exe",
+            "阿里云盘"
+        ]
     ],
     "checkver": {
         "url": "https://dorado-api.deno.dev/alipan",

@@ -18,6 +18,8 @@
     },
     "extract_to": "app",
     "pre_install": [
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Confirm-ManifestEncoding",
         "Remove-Item \"$dir\\app\\update.exe\" -Force",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"Persisting $env:APPDATA\\LarkShell ... \") -NoNewline",

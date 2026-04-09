@@ -265,6 +265,82 @@ function Remove-Junction {
     try { $dataPathItem.Delete() } catch {}
 }
 
+function Confirm-ManifestEncoding {
+    param (
+        [int]$ExpectedCodePage = 65001,
+        [string]$AppName
+    )
+
+    if ([string]::IsNullOrWhiteSpace($AppName)) {
+        $manifestPathCandidates = @()
+
+        foreach ($path in @($env:SCOOP_MANIFEST_PATH, $env:MANIFEST_PATH, $env:SOUP_MANIFEST_PATH)) {
+            if (-not [string]::IsNullOrWhiteSpace($path)) {
+                $manifestPathCandidates += $path
+            }
+        }
+
+        $appVar = Get-Variable -Name app -ErrorAction SilentlyContinue
+        $bucketVar = Get-Variable -Name bucket -ErrorAction SilentlyContinue
+        $bucketsDirVar = Get-Variable -Name bucketsdir -ErrorAction SilentlyContinue
+
+        if ($appVar -and $bucketVar -and $bucketsDirVar -and
+            -not [string]::IsNullOrWhiteSpace([string]$appVar.Value) -and
+            -not [string]::IsNullOrWhiteSpace([string]$bucketVar.Value) -and
+            -not [string]::IsNullOrWhiteSpace([string]$bucketsDirVar.Value)) {
+            $manifestPathCandidates += (Join-Path ([string]$bucketsDirVar.Value) ([string]$bucketVar.Value + '\\bucket\\' + [string]$appVar.Value + '.json'))
+        }
+
+        foreach ($manifestPath in $manifestPathCandidates) {
+            if (-not [string]::IsNullOrWhiteSpace($manifestPath) -and (Test-Path -LiteralPath $manifestPath)) {
+                $AppName = [System.IO.Path]::GetFileNameWithoutExtension($manifestPath)
+                break
+            }
+        }
+    }
+
+    if ([string]::IsNullOrWhiteSpace($AppName)) {
+        $appVar = Get-Variable -Name app -ErrorAction SilentlyContinue
+        if ($appVar -and -not [string]::IsNullOrWhiteSpace([string]$appVar.Value)) {
+            $AppName = [string]$appVar.Value
+        }
+    }
+
+    if ([string]::IsNullOrWhiteSpace($AppName)) {
+        foreach ($name in @($env:SCOOP_PACKAGE_NAME, $env:SCOOP_PACKAGE, $env:SOUP_APPNAME)) {
+            if (-not [string]::IsNullOrWhiteSpace($name)) {
+                $AppName = $name
+                break
+            }
+        }
+    }
+
+    if ([string]::IsNullOrWhiteSpace($AppName)) {
+        $AppName = 'this app'
+    }
+
+    try {
+        $currentCodePage = [Console]::OutputEncoding.CodePage
+    }
+    catch {
+        return
+    }
+
+    if ($currentCodePage -eq $ExpectedCodePage) {
+        return
+    }
+
+    Write-Warning "Current console code page is $currentCodePage, but $AppName expects UTF-8 ($ExpectedCodePage). Chinese text may be garbled and shortcut creation may fail."
+    Write-Warning "Recommended: run 'chcp 65001' and retry installation."
+
+    if ($Host.Name -eq 'ConsoleHost' -and -not $env:CI) {
+        $answer = Read-Host 'Continue anyway? [Y/n] (default: Y)'
+        if ($answer -match '^(n|no)$') {
+            throw "Installation cancelled by user due to encoding mismatch for $AppName."
+        }
+    }
+}
+
 function Stop-App {
     param(
         [Parameter(Position = 0, ValueFromPipeline, HelpMessage = "Array of paths to search for executables")]
