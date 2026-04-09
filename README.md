@@ -49,11 +49,11 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 | **quark** | 夸克浏览器，学习、工作、生活的高效拍档。 | [Link](https://www.quark.cn/) |
 | **tim** | 团队沟通协作工具 | [Link](https://tim.qq.com/) |
 | **todesk** | ToDesk远程桌面软件-免费安全流畅的远程连接电脑手机 | [Link](https://www.todesk.com/) |
-| **total-uninstall-pro** | Total Uninstall Pro, **Fixed version**. | [Link](https://www.martau.com/) |
+| **total-uninstall-pro** | Total Uninstall Pro, Modified Version. | [Link](https://www.martau.com/) |
 | **utools** | Your productive tools set and launcher. | [Link](https://u.tools/) |
 | **uuyc** | 网易UU远程，提供低延迟远程连接与云游戏体验。 | [Link](https://uuyc.163.com/) |
 | **wechat-devtools** | To help developers develop and debug Weixin Mini Programs more simply and efficiently. | [Link](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html) |
-| **wecom** | WeCom/WXWork/企业微信, a professional office tool created by Tencent | [Link](https://work.weixin.qq.com/) |
+| **wecom** | WeCom/WXWork/企业微信/WeChat-Work, a professional office management tool for enterprises created by Tencent | [Link](https://work.weixin.qq.com/) |
 | **weflow** | WeFlow - 一个本地的聊天导出和年度报告应用 | [Link](https://github.com/hicccc77/WeFlow) |
 | **wemeet** | 腾讯会议是一款支持多场景、多平台、高清流畅的在线会议软件。 | [Link](https://meeting.tencent.com) |
 | **wpsoffice-cn** | WPS Office 协同办公软件（国内版） | [Link](https://www.wps.cn) |
@@ -74,3 +74,6 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 ## ⚖️ 许可证 (License)
 
 本项目采用 [BSD 2-Clause License](LICENSE) 授权。
+
+
+
