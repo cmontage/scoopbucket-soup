@@ -12,7 +12,7 @@
 		"script": [
 			". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
 			"$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)",
-			"if (-not $isAdmin) { Write-Warning 'uuyc installation requires administrator privileges. Please rerun Scoop in an elevated PowerShell.'; exit 1 }",
+			"if (-not $isAdmin) { Write-Warning \"`nuuyc installation requires administrator privileges.`nPlease rerun Scoop in an elevated PowerShell.`n\"; exit 1 }",
 			"$installer = Get-ChildItem \"$dir\\*.exe\" | Select-Object -First 1",
 			"Start-Process -FilePath $installer.FullName -ArgumentList \"/S /D=$dir\" -Wait",
 			"Remove-Item 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\GameViewer' -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
@@ -29,7 +29,7 @@
 	"uninstaller": {
 		"script": [
 			"$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)",
-			"if (-not $isAdmin) { Write-Warning 'uuyc uninstall cleanup requires administrator privileges. Skipping privileged cleanup.'; return }",
+			"if (-not $isAdmin) { Write-Warning \"`nuuyc uninstall cleanup requires administrator privileges.`nSkipping privileged cleanup.`n\"; return }",
 			"$nativeUninstaller = Get-ChildItem \"$dir\" -Filter 'unins*.exe' -File -ErrorAction SilentlyContinue | Select-Object -First 1",
 			"if ($nativeUninstaller) {",
 			"    Start-Process -FilePath $nativeUninstaller.FullName -ArgumentList '/S' -Wait -ErrorAction SilentlyContinue",
@@ -42,7 +42,7 @@
 	},
 	"post_uninstall": [
 		"$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)",
-		"if (-not $isAdmin) { Write-Warning 'uuyc post_uninstall cleanup requires administrator privileges. Skipping privileged cleanup.'; return }",
+		"if (-not $isAdmin) { Write-Warning \"`nuuyc post_uninstall cleanup requires administrator privileges.`nSkipping privileged cleanup.`n\"; return }",
 		"$sidRoots = Get-ChildItem Registry::HKEY_USERS | Where-Object { $_.PSChildName -match '^S-1-5-21-(\\d+-){3}\\d+$' } | ForEach-Object { $_.PSPath }",
 		"foreach ($sid in $sidRoots) {",
 		"    Remove-Item \"$sid\\SOFTWARE\\Netease\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
