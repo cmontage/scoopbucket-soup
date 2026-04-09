@@ -336,7 +336,8 @@ function Confirm-ManifestEncoding {
     if ($Host.Name -eq 'ConsoleHost' -and -not $env:CI) {
         $answer = Read-Host 'Continue anyway? [Y/n] (default: Y)'
         if ($answer -match '^(n|no)$') {
-            throw "Installation cancelled by user due to encoding mismatch for $AppName."
+            Write-Host "Installation cancelled by user due to encoding mismatch for $AppName." -ForegroundColor DarkYellow
+            exit 1
         }
     }
 }
