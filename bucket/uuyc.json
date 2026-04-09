@@ -13,7 +13,9 @@
 			"$installer = Get-ChildItem \"$dir\\*.exe\" | Select-Object -First 1",
 			"Start-Process -FilePath $installer.FullName -ArgumentList \"/S /D=$dir\" -Wait",
 			"Remove-Item 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\GameViewer' -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-			"Remove-ItemProperty 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' -Name 'GameViewer' -ErrorAction SilentlyContinue"
+			"Remove-ItemProperty 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' -Name 'GameViewer' -ErrorAction SilentlyContinue",
+			"Get-ChildItem \"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\" -Filter '*UU*.lnk' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue",
+			"Get-ChildItem \"$env:ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\" -Filter '*UU*.lnk' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue"
 		]
 	},
 	"uninstaller": {
