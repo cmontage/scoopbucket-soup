@@ -17,7 +17,6 @@
     ],
     "pre_install": [
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-ManifestEncoding",
         "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
         "Remove-Item \"$dir\\Uninstall.exe\" -Force -Recurse",
         "Write-Host (\"`nPersisting $env:APPDATA\\Tencent\\WXWork ... \") -NoNewline",

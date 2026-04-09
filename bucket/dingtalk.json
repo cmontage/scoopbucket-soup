@@ -9,8 +9,6 @@
     "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_installer/Release/overseas/DingTalk_v8.2.13.260209001.exe#/dl.7z",
     "hash": "5f79970b981076d31a63d0833fee16b25221c5c75e4a23ad284511889fbb7005",
     "pre_install": [
-        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Confirm-ManifestEncoding",
         "ensure \"$dir\\main\\current\"",
         "Move-Item \"$dir\\build\\dist\\*\" \"$dir\\main\\current\" -Force",
         "Move-Item \"$dir\\build\\updater\\*\" \"$dir\" -Force",

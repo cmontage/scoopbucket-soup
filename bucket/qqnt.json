@@ -22,8 +22,6 @@
     },
     "installer": {
         "script": [
-            ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-            "Confirm-ManifestEncoding",
             "$configpath = \"$([Environment]::GetFolderPath('CommonDocuments'))\\Tencent\\QQ\"",
             "if (!(Test-Path -Path \"$configpath\")) {",
             "    New-Item -Path \"$configpath\" -Type Directory -Force -ErrorAction SilentlyContinue | Out-Null",

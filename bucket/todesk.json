@@ -32,8 +32,6 @@
     ],
     "installer": {
         "script": [
-            ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-            "Confirm-ManifestEncoding",
             "Expand-7zipArchive -Path \"$dir\\app64.7z\" -DestinationPath $dir"
         ]
     },
