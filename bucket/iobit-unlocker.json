@@ -1,11 +1,55 @@
 {
-    "version": "1.3.0",
-    "description": "Never Worry about “Cannot Delete Files” on Your PC",
+    "version": "1.3.0.11",
+    "description": "Never Worry about Cannot Delete Files on Your PC",
     "homepage": "https://www.iobit.com/en/iobit-unlocker.php",
-    "license": "Freeware",
+    "license": {
+        "identifier": "Freeware",
+        "url": "https://www.iobit.com/en/eula.php"
+    },
     "url": "https://cdn.iobit.com/dl/unlocker-setup.exe",
     "hash": "2efdffd1cf3adab21ff760f009d8893d8c4cbcf63b2c3bfcc1139457c9cd430b",
     "innosetup": true,
+    "pre_install": [
+        "if (Test-Path \"$dir\\{app}\") { Move-Item \"$dir\\{app}\\*\" \"$dir\" -Force }",
+        "$sys = Get-ChildItem \"$dir\\IObitUnlocker,*.sys\" -ErrorAction SilentlyContinue | Select-Object -First 1",
+        "if ($sys) { Move-Item $sys.FullName \"$dir\\IObitUnlocker.sys\" -Force }",
+        "$ext = Get-ChildItem \"$dir\\IObitUnlockerExtension,*.dll\" -ErrorAction SilentlyContinue | Select-Object -First 1",
+        "if ($ext) { Move-Item $ext.FullName \"$dir\\IObitUnlockerExtension.dll\" -Force }",
+        "Remove-Item \"$dir\\IObitUnlocker,*.sys\",\"$dir\\IObitUnlockerExtension,*.dll\" -Force -ErrorAction SilentlyContinue",
+        "Remove-Item \"$dir\\{app}\",\"$dir\\{tmp}\",\"$dir\\install_script.iss\" -Recurse -Force -ErrorAction SilentlyContinue"
+    ],
+    "post_install": [
+        "if ($global) {",
+        "    $registry_scope = 'HKEY_LOCAL_MACHINE'",
+        "} else {",
+        "    $registry_scope = 'HKEY_CURRENT_USER'",
+        "}",
+        "$instdir = $($dir -replace '\\\\', '\\\\')",
+        "@\"",
+        "Windows Registry Editor Version 5.00",
+        "[$registry_scope\\SOFTWARE\\Classes\\*\\shell\\IObitUnlocker]",
+        "@='IObit Unlocker'",
+        "\"Icon\"=\"$instdir\\\\IObitUnlocker.exe\"",
+        "[$registry_scope\\SOFTWARE\\Classes\\*\\shell\\IObitUnlocker\\command]",
+        "@=\"\\\"$instdir\\\\IObitUnlocker.exe\\\" \\\"%1\\\"\"",
+        "[$registry_scope\\SOFTWARE\\Classes\\Directory\\shell\\IObitUnlocker]",
+        "@='IObit Unlocker'",
+        "\"Icon\"=\"$instdir\\\\IObitUnlocker.exe\"",
+        "[$registry_scope\\SOFTWARE\\Classes\\Directory\\shell\\IObitUnlocker\\command]",
+        "@=\"\\\"$instdir\\\\IObitUnlocker.exe\\\" \\\"%1\\\"\"",
+        "\"@ | Set-Content -Path \"$dir\\install-iobit-unlocker.reg\" -Encoding Unicode",
+        "reg import \"$dir\\install-iobit-unlocker.reg\""
+    ],
+    "post_uninstall": [
+        "if ($global) {",
+        "    $registry_scope = 'HKLM'",
+        "} else {",
+        "    $registry_scope = 'HKCU'",
+        "}",
+        "reg.exe delete \"$registry_scope\\SOFTWARE\\Classes\\*\\shell\\IObitUnlocker\" /f",
+        "reg.exe delete \"$registry_scope\\SOFTWARE\\Classes\\Directory\\shell\\IObitUnlocker\" /f",
+        "reg.exe delete \"HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\IObit Unlocker_is1\" /f"
+    ],
     "bin": "IObitUnlocker.exe",
     "shortcuts": [
         [
@@ -14,9 +58,20 @@
         ]
     ],
     "checkver": {
-        "regex": "(?i)ver_size.*V *([\\d.]+)</span>"
+        "script": [
+            "$url = 'https://cdn.iobit.com/dl/unlocker-setup.exe'",
+            "$tmp = Join-Path $env:TEMP 'unlocker-setup-version.exe'",
+            "Invoke-WebRequest -Uri $url -OutFile $tmp -UseBasicParsing",
+            "$version = (Get-Item $tmp).VersionInfo.FileVersion",
+            "Remove-Item $tmp -Force -ErrorAction SilentlyContinue",
+            "Write-Output $version"
+        ],
+        "regex": "(?<version>[\\d.]+)"
     },
     "autoupdate": {
-        "url": "https://cdn.iobit.com/dl/unlocker-setup.exe"
+        "url": "https://cdn.iobit.com/dl/unlocker-setup.exe",
+        "hash": {
+            "mode": "download"
+        }
     }
 }
