@@ -1,0 +1,113 @@
+name: Sync README App List
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "bucket/*.json"
+  pull_request:
+    paths:
+      - "bucket/*.json"
+
+permissions:
+  contents: write
+
+jobs:
+  sync-readme-app-list:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Detect add/remove manifests
+        id: detect
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should_sync=true" >> "$GITHUB_OUTPUT"
+            echo "Manual trigger detected, sync enabled."
+            exit 0
+          fi
+
+          changes="$(git diff --name-status "${{ github.event.before }}" "${{ github.sha }}" -- 'bucket/*.json' || true)"
+          echo "Changed manifests:"
+          echo "$changes"
+
+          if echo "$changes" | grep -Eq '^[AD][[:space:]]+bucket/.+\.json$'; then
+            echo "should_sync=true" >> "$GITHUB_OUTPUT"
+            echo "Detected manifest add/remove, sync enabled."
+          else
+            echo "should_sync=false" >> "$GITHUB_OUTPUT"
+            echo "No manifest add/remove, skip sync."
+          fi
+
+      - name: Sync README app list
+        if: steps.detect.outputs.should_sync == 'true'
+        shell: pwsh
+        run: ./bin/sync-readme-app-list.ps1
+
+      - name: Commit and push if changed
+        if: steps.detect.outputs.should_sync == 'true'
+        shell: bash
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "No README changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: sync README app list"
+          git push
+
+  verify-readme-app-list-pr:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Detect add/remove manifests in PR
+        id: detect_pr
+        shell: bash
+        run: |
+          changes="$(git diff --name-status "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" -- 'bucket/*.json' || true)"
+          echo "Changed manifests in PR:"
+          echo "$changes"
+
+          if echo "$changes" | grep -Eq '^[AD][[:space:]]+bucket/.+\.json$'; then
+            echo "should_check=true" >> "$GITHUB_OUTPUT"
+            echo "Detected manifest add/remove, README check enabled."
+          else
+            echo "should_check=false" >> "$GITHUB_OUTPUT"
+            echo "No manifest add/remove, skip README check."
+          fi
+
+      - name: Rebuild README app list
+        if: steps.detect_pr.outputs.should_check == 'true'
+        shell: pwsh
+        run: ./bin/sync-readme-app-list.ps1
+
+      - name: Verify README is up to date
+        if: steps.detect_pr.outputs.should_check == 'true'
+        shell: bash
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "README app list is up to date."
+            exit 0
+          fi
+
+          echo "README app list is not up to date."
+          echo "Please run: ./bin/sync-readme-app-list.ps1"
+          git --no-pager diff -- README.md
+          exit 1
