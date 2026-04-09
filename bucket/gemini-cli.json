@@ -16,7 +16,7 @@
             "Pop-Location",
             "# Create gemini.cmd shim",
             "Set-Content -Path \"$dir\\gemini.cmd\" -Value '@echo off' -Encoding ASCII",
-            "Add-Content -Path \"$dir\\gemini.cmd\" -Value '\"node\" \"%~dp0dist\\index.js\" %*' -Encoding ASCII"
+            "Add-Content -Path \"$dir\\gemini.cmd\" -Value '\"node\" \"%~dp0bundle\\gemini.js\" %*' -Encoding ASCII"
         ]
     },
     "uninstaller": {
