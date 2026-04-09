@@ -1,13 +1,13 @@
 ﻿# 📦 ScoopBucket-Soup 🍜
 
+[![Scoop](https://img.shields.io/badge/Scoop-Manifests-blue.svg)](https://scoop.sh/) [![License](https://img.shields.io/badge/license-BSD--2--Clause-orange.svg)](LICENSE)
+
 > 一个自用熬制的 Scoop 软件源。包含许多常用的国产软件及工具。
 
 ### ✨ 本仓库特性 (Features)
 
 - **数据持久化**：针对常用国产软件进行深度优化，通过 `persist` 或 `Junction` 技术，尽可能（如果可以）确保应用设置、聊天记录等数据在升级或重装时得以保留。
 - **卸载更纯净**：精心编写卸载脚本，在卸载应用时自动清理残留的缓存、临时文件及路径，尽力争取做到卸载不留痕。
-
-[![Scoop](https://img.shields.io/badge/Scoop-Manifests-blue.svg)](https://scoop.sh/) [![License](https://img.shields.io/badge/license-BSD--2--Clause-orange.svg)](LICENSE)
 
 ---
 
