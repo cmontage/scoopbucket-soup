@@ -2,12 +2,12 @@
     "version": "7.6.2",
     "homepage": "https://www.martau.com/",
     "description": "Total Uninstall Pro, Fixed version.",
-    "url": "https://b2.1122330.xyz/appzip/TotalUninstallPro_7.6.2.zip",
-    "hash": "f00430ed0f5720e1ae9c497af836a0d828d940ee7b5016bb176536fa99c31a13",
+    "url": "https://b2.1122330.xyz/appzip/TotalUninstallPro_7.6.2_x64.zip",
+    "hash": "a3347b50080b6cd1529b27e91abe066fa596c5b074e705b89cba2099329dadd2",
     "shortcuts": [
         [
-            "Total Uninstall Pro.exe",
-            "Total Uninstall"
+            "Tu_P.exe",
+            "Total Uninstall Pro"
         ]
     ]
 }
