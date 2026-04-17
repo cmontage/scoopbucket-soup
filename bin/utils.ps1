@@ -1,4 +1,4 @@
-﻿function Get-LanzouList {
+function Get-LanzouList {
     param (
         [Parameter(Mandatory = $true, Position = 0)]
         [string]
@@ -245,9 +245,9 @@ function New-PersistDirectory {
         else {
             if ($Migrate) {
                 # Migrate data
-                Get-ChildItem $dataPath | ForEach-Object { Move-Item $_.FullName $persistPath -Force } | Out-Null
+                Get-ChildItem $dataPath | ForEach-Object { Move-Item $_.FullName $persistPath -Force -ErrorAction SilentlyContinue | Out-Null }
             }
-            Remove-Item $dataPath -Force -Recurse | Out-Null
+            Remove-Item $dataPath -Force -Recurse -ErrorAction SilentlyContinue | Out-Null
         }
     }
     # Create new Junction
@@ -263,31 +263,6 @@ function Remove-Junction {
     # Delete Junction only
     $dataPathItem = Get-Item -Path $dataPath
     try { $dataPathItem.Delete() } catch {}
-}
-
-function Stop-App {
-    param(
-        [Parameter(Position = 0, ValueFromPipeline, HelpMessage = "Array of paths to search for executables")]
-        [string[]]
-        $Path
-    )
-
-    # 如果未传入 Path 参数，使用默认值
-    if (-not $Path) {
-        $Path = @($dir, (Split-Path $dir -Parent) + '\current')
-    }
-
-    # 获取所有进程到内存中，提高性能
-    $allProcesses = Get-Process
-
-    foreach ($app_dir in $Path) {
-        $allProcesses | Where-Object {
-            $_.Modules.FileName -like "$app_dir\*"
-        } | ForEach-Object {
-            Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue
-            Wait-Process -Id $_.Id -ErrorAction SilentlyContinue -Timeout 30
-        }
-    }
 }
 
 function Set-RegValue {
@@ -314,7 +289,7 @@ function Set-RegValue {
         $Wow64
     )
     try {
-        if ((Get-ItemPropertyValue -Path $Path -Name $Name) -ne $Value) { throw }
+        if ((Get-ItemPropertyValue -Path $Path -Name $Name -ErrorAction Stop) -ne $Value) { throw }
     }
     catch {
         $Path = $Path.Replace(':', '')
@@ -406,5 +381,382 @@ function Confirm-Action {
             Write-Host "Action canceled." -f DarkRed
             exit
         }
+    }
+}
+
+# Ensure current operation is running with administrator privileges.
+function Check-Admin {
+    param(
+        [string]$Prompt = "[ERROR] Requires admin rights to run. Use admin rights? (y/n)"
+    )
+
+    $isAdmin = ([System.Security.Principal.WindowsPrincipal][System.Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(
+        [System.Security.Principal.WindowsBuiltInRole]::Administrator
+    )
+
+    if ($isAdmin) {
+        return
+    }
+
+    Write-Host "`n$Prompt " -ForegroundColor Red -NoNewline
+    $confirmation = Read-Host
+
+    if ([string]::IsNullOrWhiteSpace($confirmation) -or $confirmation -match '^(?i:y|yes)$') {
+        $elevatedCommand = @"
+Add-Type -AssemblyName System.Windows.Forms
+Start-Sleep -Milliseconds 350
+[System.Windows.Forms.SendKeys]::SendWait('{UP}')
+"@
+
+        $terminal = Get-Command "wt.exe" -ErrorAction SilentlyContinue
+        if ($terminal) {
+            Start-Process -FilePath $terminal.Source -Verb RunAs -ArgumentList @(
+                "powershell.exe",
+                "-NoExit",
+                "-ExecutionPolicy", "Bypass",
+                "-Command", $elevatedCommand
+            ) | Out-Null
+        }
+        else {
+            Start-Process -FilePath "powershell.exe" -Verb RunAs -ArgumentList @(
+                "-NoExit",
+                "-ExecutionPolicy", "Bypass",
+                "-Command", $elevatedCommand
+            ) | Out-Null
+        }
+
+        abort "Current operation terminated. Continue in elevated terminal."
+    }
+
+    abort $Prompt
+}
+
+# Remove application data (local directories and registry entries)
+<#
+.SYNOPSIS
+    Remove application data including local directories and registry entries.
+
+.DESCRIPTION
+    This function removes application data by deleting specified local directories and registry entries.
+    It continues execution even if paths don't exist or deletion fails.
+
+.PARAMETER LocalPaths
+    Array of local directory paths to delete (e.g., environment variables like $env:LOCALAPPDATA)
+
+.PARAMETER RegistryPaths
+    Array of registry paths to delete (e.g., 'HKCU:\SOFTWARE\AppName')
+
+.EXAMPLE
+    Remove-AppData -LocalPaths @(
+        "$env:LOCALAPPDATA\AppName",
+        "$env:APPDATA\AppName"
+    ) -RegistryPaths @(
+        "HKCU:\SOFTWARE\AppName",
+        "HKCU:\SOFTWARE\Classes\AppName*"
+    )
+#>
+function Remove-AppData {
+    param(
+        [Parameter(Mandatory = $false)]
+        [string[]]$LocalPaths,
+
+        [Parameter(Mandatory = $false)]
+        [string[]]$RegistryPaths,
+
+        [Parameter(Mandatory = $false)]
+        [string[]]$RegistryValues,
+
+        [Parameter(Mandatory = $false)]
+        [hashtable]$ConditionalRegistry
+    )
+
+    # Remove local directories
+    if ($LocalPaths) {
+        foreach ($path in $LocalPaths) {
+            if ($path -and (Test-Path $path)) {
+                Write-Host "`nDeleting $path ..." -f DarkGray -NoNewline
+                Remove-Item $path -Force -Recurse
+            }
+        }
+    }
+
+    # Remove registry entries (entire keys)
+    if ($RegistryPaths) {
+        Write-Host "`nDeleting registry entries ..." -f DarkGray -NoNewline
+        foreach ($regPath in $RegistryPaths) {
+            if ($regPath) {
+                # Convert PowerShell registry path to reg.exe format
+                $regPath = $regPath -replace 'Registry::', ''
+                $regPath = $regPath -replace ':', ''
+                # Execute reg.exe delete
+                reg.exe delete "$regPath" /f 2>$null | Out-Null
+            }
+        }
+    }
+
+    # Remove specific registry values
+    if ($RegistryValues) {
+        foreach ($regValue in $RegistryValues) {
+            if ($regValue) {
+                # Format: "path|valuename"
+                $parts = $regValue -split '\|', 2
+                if ($parts.Count -eq 2) {
+                    $regPath = $parts[0] -replace 'Registry::', '' -replace ':', ''
+                    $valueName = $parts[1]
+                    reg.exe delete "$regPath" /v "$valueName" /f 2>$null | Out-Null
+                }
+            }
+        }
+    }
+
+    # Remove conditional registry entries
+    if ($ConditionalRegistry) {
+        foreach ($condition in $ConditionalRegistry.Keys) {
+            $shouldDelete = $false
+            
+            if ($condition -eq 'uninstall' -and $cmd -eq 'uninstall') {
+                $shouldDelete = $true
+            }
+            elseif ($condition -eq 'global-uninstall' -and $global -and $cmd -eq 'uninstall') {
+                $shouldDelete = $true
+            }
+            
+            if ($shouldDelete) {
+                $paths = $ConditionalRegistry[$condition]
+                foreach ($regPath in $paths) {
+                    if ($regPath) {
+                        $regPath = $regPath -replace 'Registry::', '' -replace ':', ''
+                        reg.exe delete "$regPath" /f 2>$null | Out-Null
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Check Scoop repository remote URL
+<#
+.SYNOPSIS
+    Check if Scoop bucket is from specified remote URLs.
+
+.DESCRIPTION
+    This function checks if the Scoop installation's remote URL matches one of the specified URLs.
+    If Scoop is from cmontage/scoop (GitHub or Gitee), the function returns $false to skip script execution.
+
+.PARAMETER RemoteUrls
+    Array of remote URLs to check against (default: cmontage's GitHub and Gitee repos)
+
+.EXAMPLE
+    if (Test-ScoopRemote) {
+        Write-Host "Skipping process stop - using cmontage/scoop"
+        return
+    }
+
+.RETURNS
+    $true if remote is cmontage/scoop (should skip execution)
+    $false otherwise (should proceed with execution)
+#>
+function Test-ScoopRemote {
+    param(
+        [Parameter(Mandatory = $false)]
+        [string[]]$RemoteUrls = @(
+            "https://github.com/cmontage/scoop",
+            "https://gitee.com/cmontage/scoop"
+        )
+    )
+
+    try {
+        # Get Scoop directory from environment or default location
+        $scoopRoot = $env:SCOOP
+        if (-not $scoopRoot) {
+            $scoopRoot = "$env:USERPROFILE\scoop"
+        }
+
+        # Check if apps/scoop directory exists and contains git config
+        $scoopGitConfig = Join-Path $scoopRoot "apps\scoop\current\.git\config"
+        
+        if (-not (Test-Path $scoopGitConfig)) {
+            # Try alternative path
+            $scoopGitConfig = Join-Path $scoopRoot "apps\scoop\.git\config"
+        }
+
+        if (Test-Path $scoopGitConfig) {
+            $gitConfig = Get-Content $scoopGitConfig -Raw
+            
+            # Extract remote URL
+            $urlMatch = [regex]::Match($gitConfig, 'url\s*=\s*(.+?)(?:\s|$)')
+            if ($urlMatch.Success) {
+                $remoteUrl = $urlMatch.Groups[1].Value.Trim()
+                
+                # Check if remote URL matches any of the specified URLs
+                foreach ($url in $RemoteUrls) {
+                    # Normalize URLs for comparison (remove trailing .git, case-insensitive)
+                    $normalizedRemote = $remoteUrl -replace '\.git$', '' -replace '/$', ''
+                    $normalizedCheck = $url -replace '\.git$', '' -replace '/$', ''
+                    
+                    if ($normalizedRemote -eq $normalizedCheck) {
+                        Write-Host "`nScoop remote is from cmontage/scoop. Skipping process termination." -ForegroundColor Yellow
+                        return $true
+                    }
+                }
+            }
+        }
+    }
+    catch {
+        Write-Host "Error checking Scoop remote: $_" -ForegroundColor Yellow
+    }
+
+    return $false
+}
+
+# Stop process with elevation retry capability
+<#
+.SYNOPSIS
+    Stop running application processes with automatic admin elevation retry.
+
+.DESCRIPTION
+    This function attempts to stop running processes for an application.
+    If the initial attempt fails, it retries with administrator privileges.
+
+.PARAMETER ProcessNames
+    Array of process names to stop (e.g., "Spark", "App")
+
+.PARAMETER Path
+    Array of file paths to search for running executables (optional)
+
+.PARAMETER TimeoutSeconds
+    Timeout in seconds to wait for process termination (default: 30)
+
+.EXAMPLE
+    Stop-ProcessWithElevation -ProcessNames @("Spark", "SparkDesktop")
+
+.EXAMPLE
+    Stop-ProcessWithElevation -ProcessNames @("Spark") -Path @("$env:LOCALAPPDATA\Spark")
+#>
+function Stop-Process {
+    param(
+        [Parameter(Mandatory = $false)]
+        [string[]]$ProcessNames,
+
+        [Parameter(Mandatory = $false)]
+        [string[]]$Path,
+
+        [Parameter(Mandatory = $false)]
+        [int]$TimeoutSeconds = 30
+    )
+
+    # Check if should skip based on Scoop remote
+    if (Test-ScoopRemote) {
+        # Write-Host "Skipping process termination - using cmontage/scoop repository." -ForegroundColor Green
+        return
+    }
+
+    # Use default paths if none provided
+    if (-not $Path -and -not $ProcessNames) {
+        $Path = @($dir, "$dir\app")
+    }
+
+    # Collect all processes to terminate
+    $processesToKill = @()
+    
+    # First, add processes found by name
+    if ($ProcessNames -and $ProcessNames.Count -gt 0) {
+        foreach ($processName in $ProcessNames) {
+            try {
+                $processes = Get-Process -Name $processName -ErrorAction SilentlyContinue
+                if ($processes) {
+                    $processesToKill += $processes
+                }
+            }
+            catch {
+                # Silently continue if process not found
+            }
+        }
+    }
+
+    # Second, search by file path
+    if ($Path -and $Path.Count -gt 0) {
+        try {
+            $allProcesses = Get-Process -ErrorAction SilentlyContinue
+            
+            foreach ($searchPath in $Path) {
+                $matchedProcesses = $allProcesses | Where-Object {
+                    @($_.Modules.FileName) -like "$searchPath\*"
+                }
+                
+                foreach ($proc in $matchedProcesses) {
+                    # Avoid duplicates
+                    if ($processesToKill.Id -notcontains $proc.Id) {
+                        $processesToKill += $proc
+                    }
+                }
+            }
+        }
+        catch {
+            # Silently continue on error
+        }
+    }
+
+    # If no processes found, exit gracefully
+    if ($processesToKill.Count -eq 0) {
+        Write-Host "`nNo processes found to terminate." -ForegroundColor Green -NoNewline
+        return
+    }
+
+    Write-Host "`nStopping processes..." -ForegroundColor Yellow -NoNewline
+
+    $needsElevation = $false
+
+    # First attempt: Kill processes without elevation
+    foreach ($proc in $processesToKill) {
+        try {
+            Write-Host "`n Terminating: $($proc.ProcessName) (PID: $($proc.Id))" -ForegroundColor Gray -NoNewline
+            $proc | Stop-Process -Force -ErrorAction SilentlyContinue
+        }
+        catch {
+            Write-Host "`n Error stopping $($proc.ProcessName): $_" -ForegroundColor Yellow -NoNewline
+            $needsElevation = $true
+        }
+    }
+
+    # Wait for processes to terminate
+    Start-Sleep -Milliseconds 500
+
+    # Check if we need elevation retry
+    $stillRunning = @()
+    foreach ($proc in $processesToKill) {
+        if (Get-Process -Id $proc.Id -ErrorAction SilentlyContinue) {
+            $stillRunning += $proc
+        }
+    }
+
+    # If processes still running, retry with elevation
+    if ($stillRunning -and -not $needsElevation) {
+        Write-Host "`nSome processes still running. Attempting with administrator privileges..." -ForegroundColor Yellow -NoNewline
+
+        try {
+            $procIds = $stillRunning.Id -join ','
+            
+            $elevationScript = @"
+Get-Process -Id ($procIds) -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 1
+"@
+
+            Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -Command `"$elevationScript`"" -Verb RunAs -Wait -NoNewWindow -ErrorAction SilentlyContinue
+            
+            Write-Host "`nElevation attempt completed." -ForegroundColor Green -NoNewline
+        }
+        catch {
+            Write-Host "`n✗ Failed to elevate privileges: $_" -ForegroundColor Red -NoNewline
+            Write-Host "`n  Please manually close the application before uninstalling." -ForegroundColor Yellow -NoNewline
+        }
+    }
+    elseif ($stillRunning) {
+        $procNames = $stillRunning.ProcessName -join ', '
+        Write-Host "`n✗ Could not terminate all processes." -ForegroundColor Red -NoNewline
+        Write-Host "`n  Please manually close: $procNames" -ForegroundColor Yellow -NoNewline
+    }
+    else {
+        Write-Host "`n✓ All processes terminated successfully." -ForegroundColor Green -NoNewline
     }
 }
