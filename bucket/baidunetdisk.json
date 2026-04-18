@@ -21,8 +21,8 @@
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Check-Admin",
-        "Stop-Process"
+        "Require-Admin",
+        "Stop-App"
     ],
     "post_uninstall": [
         "$bucket = $install.bucket",

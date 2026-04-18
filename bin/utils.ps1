@@ -385,7 +385,7 @@ function Confirm-Action {
 }
 
 # Ensure current operation is running with administrator privileges.
-function Check-Admin {
+function Require-Admin {
     param(
         [string]$Prompt = "[ERROR] Requires admin rights to run. Use admin rights? (y/n)"
     )
@@ -405,7 +405,7 @@ function Check-Admin {
         $elevatedCommand = @"
 Add-Type -AssemblyName System.Windows.Forms
 Start-Sleep -Milliseconds 350
-[System.Windows.Forms.SendKeys]::SendWait('{UP}')
+[System.Windows.Forms.SendKeys]::SendWait('{UP}{ENTER}')
 "@
 
         $terminal = Get-Command "wt.exe" -ErrorAction SilentlyContinue
@@ -633,7 +633,7 @@ function Test-ScoopRemote {
 .EXAMPLE
     Stop-ProcessWithElevation -ProcessNames @("Spark") -Path @("$env:LOCALAPPDATA\Spark")
 #>
-function Stop-Process {
+function Stop-App {
     param(
         [Parameter(Mandatory = $false)]
         [string[]]$ProcessNames,
