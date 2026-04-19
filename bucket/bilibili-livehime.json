@@ -51,5 +51,6 @@
             "url": "https://api.live.bilibili.com/xlive/app-blink/v1/liveVersionInfo/getHomePageLiveVersion?system_version=2",
             "jsonpath": "$.data.file_md5"
         }
-    }
+    },
+    "notes": "User data is persisted in \"$persist_dir\"."
 }

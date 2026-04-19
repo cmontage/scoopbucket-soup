@@ -54,5 +54,6 @@
     },
     "autoupdate": {
         "url": "http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_$version.exe#dl.7z"
-    }
+    },
+    "notes": "User data is persisted in \"$persist_dir\"."
 }
