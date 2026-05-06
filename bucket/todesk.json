@@ -1,5 +1,5 @@
 {
-    "version": "4.8.8.3",
+    "version": "4.8.8.9",
     "homepage": "https://www.todesk.com/",
     "description": "ToDesk远程桌面软件-免费安全流畅的远程连接电脑手机",
     "license": {
@@ -7,7 +7,7 @@
         "url": "https://www.todesk.com/licence.html"
     },
     "url": "https://dl.todesk.com/windows/ToDesk_Setup.exe#/dl.7z",
-    "hash": "c47e2e8a2b7a5b1c020f8f6ba0c775d853b78958778f99d429dd8c115647ae9c",
+    "hash": "034a84deae6291c47fa01b11db1385fe05b39210a0033425d37a076e6c791902",
     "pre_install": [
         "if (!(Test-Path \"$persist_dir\\config.ini\") -or !(Get-Item \"$persist_dir\\config.ini\").Length) {",
         "New-Item \"$persist_dir\\config.ini\" -ItemType File -Force -ErrorAction SilentlyContinue | Out-Null",
