@@ -1,4 +1,4 @@
-﻿# 📦 ScoopBucket-Soup 🍜
+# 📦 ScoopBucket-Soup 🍜
 
 [![Scoop](https://img.shields.io/badge/Scoop-Manifests-blue.svg)](https://scoop.sh/) [![License](https://img.shields.io/badge/license-BSD--2--Clause-orange.svg)](LICENSE)
 
@@ -32,7 +32,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 | **adrive** | 一款速度快、不打扰、够安全、易于分享的网盘 | [Link](https://alipan.com/) |
 | **baidunetdisk** | 百度网盘，百度公司推出的云存储服务 | [Link](https://pan.baidu.com/download) |
 | **bilibili-livehime** | 哔哩哔哩直播姬 | [Link](https://link.bilibili.com/p/eden/download#/web) |
-| **dingtalk** | 钉钉，企业协作与办公沟通平台。 | [Link](https://www.dingtalk.com/) |
+| **dingtalk-global** | 钉钉，企业协作与办公沟通平台。国际版。 | [Link](https://www.dingtalk.io/) |
 | **dingtalk-gov** | 浙政钉 | [Link](https://www.ding.zj.gov.cn/pc/index.html) |
 | **douyin** | 短视频社交应用程序，记录美好生活 | [Link](https://douyin.com/) |
 | **downkyi** | Bilibili视频下载助手 | [Link](https://github.com/leiurayer/downkyi) |
@@ -44,6 +44,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 | **m3u8-downloader** | M3U8下载器，支持多线程下载、断点续传、自动合并等功能 | [Link](https://github.com/HeiSir2014/M3U8-Downloader/) |
 | **navicat-premium-lite-cn** | Database administration and development tool | [Link](https://navicat.com.cn/products/navicat-premium-lite) |
 | **neteasemusic** | 网易云音乐客户端，发现好音乐。 | [Link](https://music.163.com/) |
+| **opencode** | Open-source AI coding agent for terminal, desktop, and editors | [Link](https://opencode.ai) |
 | **pot-desktop** | 一个跨平台的划词翻译和OCR软件 | [Link](https://pot-app.com/) |
 | **qqnt** | QQ Windows版，全新NT架构，轻松做自己。 | [Link](https://im.qq.com/pcqq/index.shtml) |
 | **quark** | 夸克浏览器，学习、工作、生活的高效拍档。 | [Link](https://www.quark.cn/) |
@@ -74,6 +75,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 ## ⚖️ 许可证 (License)
 
 本项目采用 [BSD 2-Clause License](LICENSE) 授权。
+
 
 
 
