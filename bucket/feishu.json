@@ -24,11 +24,31 @@
         "Write-Host (\"Persisting $env:APPDATA\\LarkShell ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\LarkShell\" \"$persist_dir\\AppData\" -Migrate"
     ],
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Stop-App"
+    ],
     "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"`nDeleting $env:APPDATA\\LarkShell ... \") -f DarkGray -NoNewline",
-        "Remove-Junction \"$env:APPDATA\\LarkShell\" -ErrorAction SilentlyContinue | Out-Null"
+        "$localPaths = @(",
+        "    \"$env:APPDATA\\LarkShell\"",
+        "    \"$env:APPDATA\\mssdk\"",
+        ")",
+        "$userSID = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value",
+        "$registryPaths = @(",
+        "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Classes\\feishu\"",
+        "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Classes\\feishu-open\"",
+        "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Classes\\lark\"",
+        "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Classes\\x-feishu\"",
+        "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Feishu\"",
+        "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Feishu\"",
+        ")",
+        "$registryValues = @(",
+        "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run|Feishu\"",
+        ")",
+        "Remove-AppData -LocalPaths $localPaths -RegistryPaths $registryPaths -RegistryValues $registryValues"
     ],
     "bin": "app/Feishu.exe",
     "shortcuts": [
