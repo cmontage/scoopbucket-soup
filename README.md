@@ -44,7 +44,6 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 | **m3u8-downloader** | M3U8下载器，支持多线程下载、断点续传、自动合并等功能 | [Link](https://github.com/HeiSir2014/M3U8-Downloader/) |
 | **navicat-premium-lite-cn** | Database administration and development tool | [Link](https://navicat.com.cn/products/navicat-premium-lite) |
 | **neteasemusic** | 网易云音乐客户端，发现好音乐。 | [Link](https://music.163.com/) |
-| **opencode** | Open-source AI coding agent for terminal, desktop, and editors | [Link](https://opencode.ai) |
 | **pot-desktop** | 一个跨平台的划词翻译和OCR软件 | [Link](https://pot-app.com/) |
 | **qqnt** | QQ Windows版，全新NT架构，轻松做自己。 | [Link](https://im.qq.com/pcqq/index.shtml) |
 | **quark** | 夸克浏览器，学习、工作、生活的高效拍档。 | [Link](https://www.quark.cn/) |
@@ -53,6 +52,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 | **total-uninstall-pro** | Total Uninstall Pro, Modified Version. | [Link](https://www.martau.com/) |
 | **utools** | Your productive tools set and launcher. | [Link](https://u.tools/) |
 | **uuyc** | 网易UU远程，提供低延迟远程连接与云游戏体验。 | [Link](https://uuyc.163.com/) |
+| **vmware-ws-pro-mod** | VMware Workstation Pro，16x版本精简修改版，支持win11虚拟机。 | [Link](https://www.vmware.com/) |
 | **wechat-devtools** | To help developers develop and debug Weixin Mini Programs more simply and efficiently. | [Link](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html) |
 | **wecom** | WeCom/WXWork/企业微信/WeChat-Work, a professional office management tool for enterprises created by Tencent | [Link](https://work.weixin.qq.com/) |
 | **weflow** | WeFlow - 一个本地的聊天导出和年度报告应用 | [Link](https://github.com/hicccc77/WeFlow) |
@@ -75,6 +75,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 ## ⚖️ 许可证 (License)
 
 本项目采用 [BSD 2-Clause License](LICENSE) 授权。
+
 
 
 
