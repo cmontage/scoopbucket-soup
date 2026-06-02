@@ -14,17 +14,51 @@
     "installer": {
         "script": [
             ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+            "Require-Admin",
+            "Write-Host \"`nPersisting $env:APPDATA\\123pan ... \" -NoNewline",
+            "New-PersistDirectory \"$env:APPDATA\\123pan\" \"$persist_dir\\AppData\" -Migrate",
             "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\" -Removal",
             "Remove-Item \"$dir\\`$*\" -Recurse -Force",
             "Write-Host \"`nRegistering 123pan installation ... \" -NoNewline",
-            "Set-RegValue -Path \"HKLM:\\SOFTWARE\\Wow6432Node\\123pan\" -Name \"InstallPath\" -Value \"$dir\" -Type REG_SZ"
+            "Set-RegValue -Path \"HKLM:\\SOFTWARE\\Wow6432Node\\123pan\" -Name \"InstallPath\" -Value \"$dir\" -Type REG_SZ",
+            "",
+            "Write-Host \"`nConfiguring 123SyncCloud Service ... \" -ForegroundColor Yellow",
+            "$svcDir = \"$env:ProgramData\\123SyncCloud\\service\"",
+            "$svcPath = \"$svcDir\\MaintenanceService.exe\"",
+            "# 如果系统目录中没有服务文件，则尝试从 Scoop 解压目录中寻找并复制",
+            "if (-not (Test-Path $svcPath)) {",
+            "    $found = Get-ChildItem \"$dir\" -Filter \"MaintenanceService.exe\" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1",
+            "    if ($found) {",
+            "        New-Item -ItemType Directory -Force $svcDir | Out-Null",
+            "        Copy-Item $found.FullName $svcPath -Force",
+            "        Write-Host \"Copied MaintenanceService.exe to ProgramData.\" -ForegroundColor DarkGray",
+            "    }",
+            "}",
+            "# 如果文件就绪，则注入服务注册表",
+            "if (Test-Path $svcPath) {",
+            "    $regPath = \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\123SyncCloud Maintenance Service\"",
+            "    New-Item -Path $regPath -Force | Out-Null",
+            "    Set-ItemProperty -Path $regPath -Name \"Description\" -Value \"123云盘用于核心业务所需的服务。为保证123云盘正常运行，请勿停止本服务\" -Type String",
+            "    Set-ItemProperty -Path $regPath -Name \"DisplayName\" -Value \"123SyncCloud Maintenance Service\" -Type String",
+            "    Set-ItemProperty -Path $regPath -Name \"ErrorControl\" -Value 1 -Type DWord",
+            "    Set-ItemProperty -Path $regPath -Name \"ImagePath\" -Value \"`\"$svcPath`\"\" -Type ExpandString",
+            "    Set-ItemProperty -Path $regPath -Name \"ObjectName\" -Value \"LocalSystem\" -Type String",
+            "    Set-ItemProperty -Path $regPath -Name \"Start\" -Value 2 -Type DWord",
+            "    Set-ItemProperty -Path $regPath -Name \"Type\" -Value 16 -Type DWord",
+            "    # 启动服务",
+            "    Start-Service \"123SyncCloud Maintenance Service\" -ErrorAction SilentlyContinue",
+            "    Write-Host \"Service registered and started successfully.\" -ForegroundColor Green",
+            "} else {",
+            "    Write-Host \"Warning: MaintenanceService.exe not found! Service cannot be registered.\" -ForegroundColor Red",
+            "}"
         ]
     },
     "pre_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Require-Admin",
-        "Stop-App"
+        "Stop-App",
+        "Stop-Service \"123SyncCloud Maintenance Service\" -ErrorAction SilentlyContinue"
     ],
     "post_uninstall": [
         "$bucket = $install.bucket",
@@ -71,6 +105,6 @@
     },
     "notes": [
         "You'll see a UAC prompt during installation. Don't worry, it will be completely removed when you uninstall.",
-        "Due to the specific characteristics of 123pan, login permission issues may arise. It is not possible to persist \"$env:APPDATA\\123pan\"."
+        "User data is persisted in \"$persist_dir\"."
     ]
 }
