@@ -14,8 +14,8 @@
     "installer": {
         "script": [
             ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-            "Write-Host \"`nPersisting $env:APPDATA\\123pan ... \" -NoNewline",
-            "New-PersistDirectory \"$env:APPDATA\\123pan\" \"$persist_dir\\AppData\" -Migrate",
+            // "Write-Host \"`nPersisting $env:APPDATA\\123pan ... \" -NoNewline",
+            // "New-PersistDirectory \"$env:APPDATA\\123pan\" \"$persist_dir\\AppData\" -Migrate",
             "Expand-7zipArchive \"$dir\\app.7z\" \"$dir\" -Removal",
             "Remove-Item \"$dir\\`$*\" -Recurse -Force",
             "Write-Host \"`nRegistering 123pan installation ... \" -NoNewline",
@@ -73,6 +73,6 @@
     },
     "notes": [
         "You'll see a UAC prompt during installation. Don't worry, it will be completely removed when you uninstall.",
-        "User data is persisted in \"$persist_dir\"."
+        "Due to the specific characteristics of 123pan, login permission issues may arise. It is not possible to persist \"$env:APPDATA\\123pan\"."
     ]
 }
