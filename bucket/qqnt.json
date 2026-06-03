@@ -97,6 +97,6 @@
   },
   "notes": [
     "User data and chat messages are persisted in \"$persist_dir\".",
-    "Please manually disable QQ's auto-update feature in the settings."
+    "Please manually disable QQ's auto-update feature in the settings. (Set it once and it will remember)"
   ]
 }

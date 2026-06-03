@@ -95,6 +95,6 @@
     },
     "notes": [
         "User data is persisted in \"$persist_dir\".",
-        "It is recommended to change NeteaseCloudMusic's default download directory to \"$persist_dir\\downloads\"."
+        "It is recommended to change NeteaseCloudMusic's default download directory to \"$persist_dir\\downloads\" and delete the original directory after migration."
     ]
 }
