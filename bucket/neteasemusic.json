@@ -20,15 +20,55 @@
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Get-ChildItem \"$dir\\redist_packages\" | Move-Item -Destination \"$dir\" -Force",
         "Remove-Item \"$dir\\`$PLUGINSDIR\",\"$dir\\redist_packages\" -Force -Recurse",
+        "Remove-Item \"$dir\\*update*.exe\" -Force -ErrorAction SilentlyContinue",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
         "Write-Host (\"`nPersisting $env:LOCALAPPDATA\\Netease\\CloudMusic ... \") -NoNewline",
-        "New-PersistDirectory \"$env:LOCALAPPDATA\\Netease\\CloudMusic\" \"$persist_dir\\AppData\" -Migrate"
+        "New-PersistDirectory \"$env:LOCALAPPDATA\\Netease\\CloudMusic\" \"$persist_dir\\AppData\" -Migrate",
+        "New-Item \"$dir\\downloads\" -Type Directory -Force -ErrorAction SilentlyContinue | Out-Null"
+    ],
+    "post_install": [
+        "if (Test-Path \"$env:LOCALAPPDATA\\Netease\\CloudMusic\\update\") { Remove-Item \"$env:LOCALAPPDATA\\Netease\\CloudMusic\\update\" -Force -Recurse -ErrorAction SilentlyContinue }",
+        "New-Item \"$env:LOCALAPPDATA\\Netease\\CloudMusic\\update\" -Type File -Force -ErrorAction SilentlyContinue | Out-Null"
+    ],
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Stop-App"
     ],
     "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\Netease\\CloudMusic ... \") -f DarkGray -NoNewline",
-        "Remove-Junction \"$env:LOCALAPPDATA\\Netease\\CloudMusic\" -ErrorAction SilentlyContinue | Out-Null"
+        "$localPaths = @(",
+        "    \"$env:LOCALAPPDATA\\Netease\\CloudMusic\"",
+        ")",
+        "$userSID = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value",
+        "$rot13 = [char[]]\"$dir\\cloudmusic.exe\" | ForEach-Object { $c = [int]$_; if (($c -ge 65 -and $c -le 90)) { [char](($c - 65 + 13) % 26 + 65) } elseif (($c -ge 97 -and $c -le 122)) { [char](($c - 97 + 13) % 26 + 97) } else { $_ } }; $rot13Path = ($rot13 -join '') -replace '\\\\', '\\\\\\\\'",
+        "$registryPaths = @(",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.aac'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.ape'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.cda'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.cue'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.flac'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.m4a'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.mp3'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.ncm'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.ogg'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.wav'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\cloudmusic.wma'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\orpheus'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\cloudmusic.exe'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\网易云音乐'",
+        "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Netease'",
+        ")",
+        "$registryValues = @(",
+        "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count|$rot13Path\"",
+        ")",
+        "$fwKey = 'Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\services\\SharedAccess\\Parameters\\FirewallPolicy\\FirewallRules'",
+        "$escapedDir = [regex]::Escape($dir)",
+        "Get-Item $fwKey -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Property | Where-Object { $_ -match \"$escapedDir\\\\cloudmusic\\.exe\" } | ForEach-Object { reg.exe delete ($fwKey -replace 'Registry::','') /v $_ /f 2>$null | Out-Null }",
+        "$audioKey = \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Microsoft\\Internet Explorer\\LowRegistry\\Audio\\PolicyConfig\\PropertyStore\"",
+        "Get-ChildItem $audioKey -ErrorAction SilentlyContinue | Where-Object { (Get-ItemProperty $_.PSPath -ErrorAction SilentlyContinue).PSObject.Properties.Value -match 'cloudmusic' } | ForEach-Object { reg.exe delete ($_.Name -replace 'HKEY_USERS','HKEY_USERS') /f 2>$null | Out-Null }",
+        "Remove-AppData -LocalPaths $localPaths -RegistryPaths $registryPaths -RegistryValues $registryValues"
     ],
     "bin": "cloudmusic.exe",
     "shortcuts": [
@@ -37,6 +77,7 @@
             "网易云音乐"
         ]
     ],
+    "persist": "downloads",
     "checkver": {
         "url": "https://music.163.com/api/appcustomconfig/get",
         "jsonpath": "$.data.web-new-download.pc64.downloadUrl",
@@ -51,5 +92,8 @@
                 "url": "https://d8.music.126.net/dmusic2/NeteaseCloudMusic_Music_official_$version_32.exe#/dl.7z"
             }
         }
-    }
+    },
+    "notes": [
+        "请手动修改默认下载目录为 \"$persist_dir\\downloads\"，自动迁移后删除原目录。（可选）"
+    ]
 }

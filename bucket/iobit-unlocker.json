@@ -40,6 +40,11 @@
         "\"@ | Set-Content -Path \"$dir\\install-iobit-unlocker.reg\" -Encoding Unicode",
         "reg import \"$dir\\install-iobit-unlocker.reg\""
     ],
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Stop-App"
+    ],
     "post_uninstall": [
         "if ($global) {",
         "    $registry_scope = 'HKLM'",

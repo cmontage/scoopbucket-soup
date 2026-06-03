@@ -17,6 +17,11 @@
             "hash": "166e08b5eb8f49592a7830df2de8b0e9f6e5974c59c956e290c9132cd87e501c"
         }
     },
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Stop-App"
+    ],
     "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",

@@ -29,6 +29,11 @@
         "Write-Host (\"`nPersisting $env:APPDATA\\HBuilder X ... \") -NoNewline",
         "New-PersistDirectory \"$env:APPDATA\\HBuilder X\" \"$persist_dir\\AppData\" -Migrate"
     ],
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Stop-App"
+    ],
     "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
