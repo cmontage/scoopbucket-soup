@@ -68,5 +68,6 @@
             "url": "https://feishu.cn/api/downloads",
             "jp": "$.versions.Windows.hash"
         }
-    }
+    },
+    "notes": "User data is persisted in \"$persist_dir\"."
 }

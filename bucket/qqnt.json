@@ -1,82 +1,102 @@
 {
-    "version": "9.9.30.260429",
-    "description": "QQ Windows版，全新NT架构，轻松做自己。",
-    "homepage": "https://im.qq.com/pcqq/index.shtml",
-    "license": {
-        "identifier": "Proprietary",
-        "url": "https://ti.qq.com/agreement/index.html"
+  "version": "9.9.31_260528",
+  "description": "QQ Windows版，全新NT架构，轻松做自己。",
+  "homepage": "https://im.qq.com/pcqq/index.shtml",
+  "license": {
+    "identifier": "Proprietary",
+    "url": "https://ti.qq.com/agreement/index.html"
+  },
+  "architecture": {
+    "64bit": {
+      "url": "https://qqdl.gtimg.cn/qqfile/QQNT/9.9.31/release/092069d7/QQ_9.9.31_260528_x64_01.exe#/dl.7z",
+      "hash": "0beb5cb4ff776cba822caa0abadbd53f5892f12628a86dabea1b372c82c086bc"
     },
-    "architecture": {
-        "64bit": {
-            "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.30_260429_x64_01.exe#/dl.7z",
-            "hash": "3d991ee6cc920a73272a72d6be934144f045852b86cc557ad45341f321565859"
-        },
-        "32bit": {
-            "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.30_260429_x86_01.exe#/dl.7z",
-            "hash": "5bdfb927056ce1013eca1c9fa880870dfdcf480531befdd4ca487c8a8758bf00"
-        },
-        "arm64": {
-            "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.30_260429_arm64_01.exe#/dl.7z",
-            "hash": "7425302a651278d07df3c89072a75bb618fb5da16f1a94ec465a66e77d31b1c1"
-        }
+    "32bit": {
+      "url": "https://qqdl.gtimg.cn/qqfile/QQNT/9.9.31/release/092069d7/QQ_9.9.31_260528_x86_01.exe#/dl.7z",
+      "hash": "3d5841389abaf7c552363d84543a06734939aa2abdf6599fee11f6565ca43db1"
     },
-    "installer": {
-        "script": [
-            "$configpath = \"$([Environment]::GetFolderPath('CommonDocuments'))\\Tencent\\QQ\"",
-            "if (!(Test-Path -Path \"$configpath\")) {",
-            "    New-Item -Path \"$configpath\" -Type Directory -Force -ErrorAction SilentlyContinue | Out-Null",
-            "}",
-            "if (!(Test-Path -Path \"$configpath\\UserDataInfo.ini\" -PathType leaf)) {",
-            "    Set-Content -NoNewline -Path \"$configpath\\UserDataInfo.ini\" -Value \"[UserDataSet]`nUserDataSavePathType=2`nUserDataSavePath=`\"$persist_dir\\Tencent Files`\"\"",
-            "}"
-        ]
-    },
-    "shortcuts": [
-        [
-            "Files\\QQ.exe",
-            "QQ"
-        ]
-    ],
-    "persist": "Tencent Files",
-    "pre_uninstall": [
-        "$bucket = $install.bucket",
-        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\""
-    ],
-    "uninstaller": {
-        "script": [
-            "if ($cmd -eq 'uninstall') {",
-            "    Remove-Item -Path \"$([Environment]::GetFolderPath('CommonDocuments'))\\Tencent\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
-            "    Write-Host \"`nDeleting $env:APPDATA\\QQ ... \" -f DarkGray -NoNewline",
-            "    Remove-Item -Path \"$env:APPDATA\\QQ\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
-            "    Write-Host \"`nDeleting $env:APPDATA\\Tencent\\qimei ... \" -f DarkGray -NoNewline",
-            "    Remove-Item -Path \"$env:APPDATA\\Tencent\\qimei\" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null",
-            "}"
-        ]
-    },
-    "checkver": {
-        "script": [
-            "# Please keep this script. Using 'cdn-go.cn' may result in receiving expired cache responses.",
-            "$url = 'https://cdn-go.cn/qq-web/im.qq.com_new/latest/rainbow/windowsConfig.js'",
-            "$hostname = ([Uri]$url).Host",
-            "$records = Resolve-DnsName 'cdn-go.cn.cloud.tc.qq.com' -Type A -DnsOnly -ErrorAction Ignore",
-            "$ip = $records | Where-Object { $_.QueryType -eq 'A' -and $_.IPAddress } | Select-Object -ExpandProperty IP4Address -First 1",
-            "$url = $url -Replace [regex]::Escape($hostname), $ip",
-            "Invoke-WebRequest -Uri $url -UseBasicParsing -Headers @{'Host' = $hostname} | Select-Object -ExpandProperty Content"
-        ],
-        "regex": "QQNT/Windows/QQ_([\\d\\.]+)_([\\d]+)_x86_01.exe",
-        "replace": "${1}.${2}"
-    },
-    "autoupdate": {
-        "architecture": {
-            "64bit": {
-                "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_$match1_$match2_x64_01.exe#/dl.7z"
-            },
-            "32bit": {
-                "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_$match1_$match2_x86_01.exe#/dl.7z"
-            },
-            "arm64": {
-                "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_$match1_$match2_arm64_01.exe#/dl.7z"
-            }
-        }
+    "arm64": {
+      "url": "https://qqdl.gtimg.cn/qqfile/QQNT/9.9.31/release/092069d7/QQ_9.9.31_260528_arm64_01.exe#/dl.7z",
+      "hash": "c8d3e75914f6cf7b7276b1492a506d67ed6ab15636a69577906745c8b04c843d"
     }
+  },
+  "extract_dir": "Files",
+  "shortcuts": [["QQ.exe", "QQ"]],
+  "persist": "Tencent Files",
+  "installer": {
+    "script": [
+      "$configpath = \"$([Environment]::GetFolderPath('CommonDocuments'))\\Tencent\\QQ\"",
+      "if (!(Test-Path -Path \"$configpath\")) {",
+      "    New-Item -Path \"$configpath\" -Type Directory -Force -ErrorAction SilentlyContinue | Out-Null",
+      "}",
+      "if (!(Test-Path -Path \"$configpath\\UserDataInfo.ini\" -PathType leaf)) {",
+      "    Set-Content -NoNewline -Path \"$configpath\\UserDataInfo.ini\" -Value \"[UserDataSet]`nUserDataSavePathType=2`nUserDataSavePath=`\"$persist_dir\\Tencent Files`\"\"",
+      "}"
+    ]
+  },
+  "pre_uninstall": [
+    "$bucket = $install.bucket",
+    ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+    "Stop-App"
+  ],
+  "post_uninstall": [
+    "$bucket = $install.bucket",
+    ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+    "$localPaths = @(",
+    "    \"$env:APPDATA\\QQ\"",
+    "    \"$env:APPDATA\\QQEX\"",
+    "    \"$env:APPDATA\\Tencent\\QQ\"",
+    "    \"$env:APPDATA\\Tencent\\QQNT\"",
+    "    \"$env:APPDATA\\Tencent\\qimei\"",
+    "    \"$env:APPDATA\\Tencent\\Logs\"",
+    "    \"$env:APPDATA\\Tencent\\libsdk\"",
+    "    \"$([Environment]::GetFolderPath('CommonDocuments'))\\Tencent\"",
+    ")",
+    "$userSID = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value",
+    "$registryPaths = @(",
+    "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\QQ'",
+    "    'Registry::HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Tencent'",
+    "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Classes\\guild-notification\"",
+    "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Classes\\mqqapi\"",
+    "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Classes\\ntqq-notification\"",
+    "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Classes\\tencent\"",
+    "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Tencent\"",
+    ")",
+    "$registryValues = @(",
+    "    'Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\services\\SharedAccess\\Parameters\\FirewallPolicy\\FirewallRules|{44D70CA3-41D2-4298-A5C1-74186957419D}'",
+    "    'Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\services\\SharedAccess\\Parameters\\FirewallPolicy\\FirewallRules|{EA101638-843F-46F0-A7D1-3BAD6A2B0799}'",
+    "    \"Registry::HKEY_USERS\\$userSID\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Compatibility Assistant\\Store|$dir\\Files\\QQ.exe\"",
+    ")",
+    "Remove-AppData -LocalPaths $localPaths -RegistryPaths $registryPaths -RegistryValues $registryValues"
+  ],
+  "checkver": {
+    "script": [
+      "# Please keep this script. Using 'cdn-go.cn' may result in receiving expired cache responses.",
+      "$url = 'https://cdn-go.cn/qq-web/im.qq.com_new/latest/rainbow/windowsConfig.js'",
+      "$hostname = ([Uri]$url).Host",
+      "$records = Resolve-DnsName 'cdn-go.cn.cloud.tc.qq.com' -Type A -DnsOnly -ErrorAction Ignore",
+      "$ip = $records | Where-Object { $_.QueryType -eq 'A' -and $_.IPAddress } | Select-Object -ExpandProperty IP4Address -First 1",
+      "$url = $url -Replace [regex]::Escape($hostname), $ip",
+      "Invoke-WebRequest -Uri $url -UseBasicParsing -Headers @{'Host' = $hostname} | Select-Object -ExpandProperty Content"
+    ],
+    "regex": "QQNT/(.*?)/QQ_([\\d.]+)_([\\d]+)_x86_01.exe",
+    "replace": "${2}.${3}"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://qqdl.gtimg.cn/qqfile/QQNT/$match1/QQ_$match2_$match3_x64_01.exe#/dl.7z"
+      },
+      "32bit": {
+        "url": "https://qqdl.gtimg.cn/qqfile/QQNT/$match1/QQ_$match2_$match3_x86_01.exe#/dl.7z"
+      },
+      "arm64": {
+        "url": "https://qqdl.gtimg.cn/qqfile/QQNT/$match1/QQ_$match2_$match3_arm64_01.exe#/dl.7z"
+      }
+    }
+  },
+  "notes": [
+    "User data and chat messages are persisted in \"$persist_dir\".",
+    "Please manually disable QQ's auto-update feature in the settings."
+  ]
 }

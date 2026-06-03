@@ -14,13 +14,19 @@
         }
     },
     "post_install": "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse",
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Stop-App"
+    ],
     "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Write-Host (\"`nDeleting $env:LOCALAPPDATA\\com.pot-app.desktop ... \") -f DarkGray -NoNewline",
-        "Remove-Item \"$env:LOCALAPPDATA\\com.pot-app.desktop\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null",
-        "Write-Host (\"`nDeleting $env:APPDATA\\com.pot-app.desktop ... \") -f DarkGray -NoNewline",
-        "Remove-Item \"$env:APPDATA\\com.pot-app.desktop\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
+        "$localPaths = @(",
+        "    \"$env:LOCALAPPDATA\\com.pot-app.desktop\"",
+        "    \"$env:APPDATA\\com.pot-app.desktop\"",
+        ")",
+        "Remove-AppData -LocalPaths $localPaths"
     ],
     "bin": "pot.exe",
     "shortcuts": [

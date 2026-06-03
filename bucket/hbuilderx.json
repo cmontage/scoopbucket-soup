@@ -66,5 +66,6 @@
     },
     "autoupdate": {
         "url": "https://download1.dcloud.net.cn/download/HBuilderX.$version.zip"
-    }
+    },
+    "notes": "User data is persisted in \"$persist_dir\"."
 }

@@ -94,6 +94,7 @@
         }
     },
     "notes": [
-        "请手动修改默认下载目录为 \"$persist_dir\\downloads\"，自动迁移后删除原目录。（可选）"
+        "User data is persisted in \"$persist_dir\".",
+        "It is recommended to change NeteaseCloudMusic's default download directory to \"$persist_dir\\downloads\"."
     ]
 }

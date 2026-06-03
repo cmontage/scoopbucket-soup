@@ -105,8 +105,5 @@
     "autoupdate": {
         "url": "$matchUrl#/dl.7z"
     },
-    "notes": [
-        "You'll see a UAC prompt during installation. Don't worry, it will be completely removed when you uninstall.",
-        "User data is persisted in \"$persist_dir\"."
-    ]
+    "notes": "User data is persisted in \"$persist_dir\"."
 }

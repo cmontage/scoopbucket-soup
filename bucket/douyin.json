@@ -67,5 +67,6 @@
     },
     "autoupdate": {
         "url": "https://www.douyin.com/download/pc/obj/douyin-pc-web/douyin-pc-client/$matchId/releases/$matchBuild/$version/win32-ia32/douyin-v$version-win32-ia32-douyin.exe#/dl.7z"
-    }
+    },
+    "notes": "User data is persisted in \"$persist_dir\"."
 }
