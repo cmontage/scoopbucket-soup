@@ -8,6 +8,7 @@
             "hash": "1dcdd41dc5a4d8041bcf54fe66f79f5764076e84807cc7e20abd310e483dffa2"
         }
     },
+    "extract_dir": "PiliPlus-Win",
     "shortcuts": [
         [
             "piliplus.exe",
