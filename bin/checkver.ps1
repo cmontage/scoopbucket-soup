@@ -10,3 +10,5 @@ $checkver = "$env:SCOOP_HOME\bin\checkver.ps1"
 $remainArgs = ($remainArgs | Select-Object -Unique) -join ' '
 
 Invoke-Expression -Command "$checkver -dir $dir $remainArgs"
+
+# Use PS > .\bin\checkver.ps1 -dir .\bucket <appname>
