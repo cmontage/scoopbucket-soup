@@ -48,7 +48,6 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 | **pot-desktop** | 一个跨平台的划词翻译和OCR软件 | [Link](https://pot-app.com/) |
 | **qqnt** | QQ Windows版，全新NT架构，轻松做自己。 | [Link](https://im.qq.com/pcqq/index.shtml) |
 | **quark** | 夸克浏览器，学习、工作、生活的高效拍档。 | [Link](https://www.quark.cn/) |
-| **tim** | 团队沟通协作工具 | [Link](https://tim.qq.com/) |
 | **todesk** | ToDesk远程桌面软件-免费安全流畅的远程连接电脑手机 | [Link](https://www.todesk.com/) |
 | **total-uninstall-pro** | Total Uninstall Pro, Modified Version. | [Link](https://www.martau.com/) |
 | **utools** | Your productive tools set and launcher. | [Link](https://u.tools/) |
@@ -76,6 +75,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 ## ⚖️ 许可证 (License)
 
 本项目采用 [BSD 2-Clause License](LICENSE) 授权。
+
 
 
 
