@@ -1,0 +1,120 @@
+$userSID = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+$localPaths = @(
+    "$env:APPDATA\Tencent\TXSSO"
+    "$env:APPDATA\Tencent\Tencentdl"
+    "$env:APPDATA\Tencent\QQTempSys"
+    "$env:APPDATA\Tencent\IM"
+    "$env:APPDATA\Tencent\QQ"
+    "$env:APPDATA\Tencent\libsdk"
+    "$env:APPDATA\Tencent\TIM"
+    "$env:APPDATA\Tencent\Logs"
+)
+$registryPaths = @(
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AllFilesystemObjects\shellex\ContextMenuHandlers\QQShellExt'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppCom.RichFrameObj'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppCom.RichFrameObj.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppCom.RichPicObj'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppCom.RichPicObj.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppID\{8EC38516-F1A9-479C-B2A8-99048465131E}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppID\{9AECDA77-3D09-47BA-BD48-7C4CBE131E03}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppID\AppCom.DLL'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\AppID\TXPlatform.EXE'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{53D2405C-48AB-4C8A-8F59-CE0610F13BBC}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CRichDataObject.CRichDataObject'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CRichDataObject.CRichDataObject.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CRichDropSource.CRichDropSource'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CRichDropSource.CRichDropSource.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CRichOleFrame.CRichOleFrame'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CRichOleFrame.CRichOleFrame.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CRichPicTSRequest.CRichPicTSRequest'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CRichPicTSRequest.CRichPicTSRequest.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\ShellEx\ContextMenuHandlers\QQShellExt'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{04AD9AE4-F179-4A7B-A640-0CB8EA74A071}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{192751BF-2639-487D-B97E-67EFFFC62822}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{2771EAAE-0D46-48F8-867B-73AE78B54F0A}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{2859856E-8195-406B-9E7E-8F1D75477E1A}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{2C1C620B-C89D-4085-B0BC-088E28C62E39}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{2C3F29CA-F983-4897-A545-2221773BC5A6}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{40CBD107-7733-4280-B059-19ED37D1AA20}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{4534331A-368F-4565-A9F2-46105A68F0DA}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{45B22163-C1A9-483D-9657-0B6E8CA607C9}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{5CB46DFF-0F45-4021-9829-A234F6AC60A7}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{68E03E39-A4C1-4FE0-87C4-22B029DF3E4D}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{713AF9A5-E294-4BD1-8301-A31194561BB9}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{713D2AA3-91C2-46BA-BD77-A7BBE21163F6}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{88EA865E-665B-41C9-90A2-50040ECEF6A5}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{8DAF14C8-BF97-4CAD-9FFE-1EBA4C1810D4}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{9646BFD8-625C-45C6-BEB7-674D5CF2FCE6}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{993196BC-CCB2-440A-9F92-4B39E1F5AF53}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{A0B2CB37-1F8F-4834-B539-AFB1DC01AB9E}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Interface\{D92FCD8D-A643-49B0-AD91-2C47DFCD5333}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\lnkfile\shellex\ContextMenuHandlers\QQShellExt'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\QQCPHelper.CPAdder'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\QQCPHelper.CPAdder.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\QQShellExt.QQShellExtension'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\QQShellExt.QQShellExtension.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Tencent'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Tim'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TimwpDll.TimwpCheck'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TimwpDll.TimwpCheck.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TXPlatform.QQMainCreator'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TXPlatform.QQMainCreator.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TXPlatform.TXAppManager'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TXPlatform.TXAppManager.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TXPlatform.TXCRMAppMgr'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TXPlatform.TXCRMAppMgr.1'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{1FD42BB0-D03E-4F38-91AE-86F26E88E4D7}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{26D75A37-2E9D-45AA-BA27-168A398DB4B8}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{55997307-CDFC-40AD-83A5-B174D0A7BD7B}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{8EC38516-F1A9-479C-B2A8-99048465131E}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{B3B1E2C2-9244-4A89-90F5-9A41B8C1A3CF}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\TypeLib\{EC3A21EA-E3D9-4745-A986-6A963A44EB74}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{03766B5E-BD09-44db-8F92-510517AC2155}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{192751BF-2639-487D-B97E-67EFFFC62822}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{1B7F37B4-2CBC-4548-AE26-1B3916F9F607}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{23752AA7-CAD7-40C2-99EE-7A9CD3C20C6D}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{37086F34-1C2B-4282-A09E-8E0A7EF2A8F0}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{4F7C9975-ECA1-4190-B0EB-E37BC5E40893}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{53D2405C-48AB-4C8A-8F59-CE0610F13BBC}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{63406263-B1E1-4717-8DA6-7270FFA518A9}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{87AF538B-F052-4A0B-BAE0-E686AD921119}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{A7CC2FDB-EED7-4fda-880E-C762570CC005}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{D2D8D6C3-C762-49EA-89FF-587B62DA0BEF}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{ECF5CD34-3833-4b9b-9C8A-96683E0D7B13}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\CLSID\{ED4CA2E5-0EEA-44c1-AD7E-74A07A7507A4}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{0360A34A-2C57-4222-985F-33FC442E207F}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{04AD9AE4-F179-4A7B-A640-0CB8EA74A071}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{192751BF-2639-487D-B97E-67EFFFC62822}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{2771EAAE-0D46-48F8-867B-73AE78B54F0A}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{2859856E-8195-406B-9E7E-8F1D75477E1A}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{2C1C620B-C89D-4085-B0BC-088E28C62E39}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{2C3F29CA-F983-4897-A545-2221773BC5A6}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{40CBD107-7733-4280-B059-19ED37D1AA20}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{4534331A-368F-4565-A9F2-46105A68F0DA}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{45B22163-C1A9-483D-9657-0B6E8CA607C9}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{5CB46DFF-0F45-4021-9829-A234F6AC60A7}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{68E03E39-A4C1-4FE0-87C4-22B029DF3E4D}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{713AF9A5-E294-4BD1-8301-A31194561BB9}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{713D2AA3-91C2-46BA-BD77-A7BBE21163F6}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{88EA865E-665B-41C9-90A2-50040ECEF6A5}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{8DAF14C8-BF97-4CAD-9FFE-1EBA4C1810D4}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{9646BFD8-625C-45C6-BEB7-674D5CF2FCE6}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{993196BC-CCB2-440A-9F92-4B39E1F5AF53}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{A0B2CB37-1F8F-4834-B539-AFB1DC01AB9E}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Wow6432Node\Interface\{D92FCD8D-A643-49B0-AD91-2C47DFCD5333}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Ext\PreApproved\{ED4CA2E5-0EEA-44C1-AD7E-74A07A7507A4}'
+    'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\TIM'
+    "Registry::HKEY_USERS\$userSID\SOFTWARE\Microsoft\Windows\CurrentVersion\Ext\Stats\{ED4CA2E5-0EEA-44C1-AD7E-74A07A7507A4}"
+)
+$registryValues = @(
+    "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\SharedAccess\Parameters\FirewallPolicy\FirewallRules|{99EB2974-C3F2-47CB-A21D-23D8FE5B34EB}"
+    "Registry::HKEY_USERS\$userSID\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|TIM"
+)
+Get-Item -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Property | Where-Object { $_ -match '(?i)TIM\.exe' } | ForEach-Object {
+    $registryValues += "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\SharedAccess\Parameters\FirewallPolicy\FirewallRules|$_"
+}
+$paths = @("$dir\Bin\TIM.exe", "$($dir -replace '\\\\[^\\]+$', '\current')\Bin\TIM.exe")
+foreach ($p in $paths) {
+    $registryValues += "Registry::HKEY_USERS\$userSID\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Compatibility Assistant\Store|$p"
+}
+Remove-AppData -LocalPaths $localPaths -RegistryPaths $registryPaths -RegistryValues $registryValues
