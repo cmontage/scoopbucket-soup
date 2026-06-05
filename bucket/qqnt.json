@@ -53,6 +53,7 @@
         "    \"$env:APPDATA\\QQEX\"",
         "    \"$env:APPDATA\\Tencent\\QQ\"",
         "    \"$env:APPDATA\\Tencent\\QQNT\"",
+        "    \"$env:APPDATA\\Tencent\\QQLive\"",
         "    \"$env:APPDATA\\Tencent\\qimei\"",
         "    \"$env:APPDATA\\Tencent\\Logs\"",
         "    \"$env:APPDATA\\Tencent\\libsdk\"",
