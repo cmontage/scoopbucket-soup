@@ -37,6 +37,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 | **douyin** | 短视频社交应用程序，记录美好生活 | [Link](https://douyin.com/) |
 | **downkyi** | Bilibili视频下载助手 | [Link](https://github.com/leiurayer/downkyi) |
 | **feishu** | 新一代知识管理平台 | [Link](https://feishu.cn/) |
+| **fn-sync** | 飞牛同步客户端，文件自动同步工具 | [Link](https://fnnas.com/download?key=fn-sync-client) |
 | **gemini-cli** | An open-source AI agent that brings the power of Gemini directly into your terminal | [Link](https://github.com/google-gemini/gemini-cli) |
 | **hbuilderx** | HBuilderX，简称HX，轻如编辑器、强如IDE | [Link](https://www.dcloud.io/hbuilderx.html) |
 | **iobit-unlocker** | Never Worry about Cannot Delete Files on Your PC | [Link](https://www.iobit.com/en/iobit-unlocker.php) |
@@ -76,6 +77,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 ## ⚖️ 许可证 (License)
 
 本项目采用 [BSD 2-Clause License](LICENSE) 授权。
+
 
 
 
