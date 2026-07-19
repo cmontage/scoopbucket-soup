@@ -1,13 +1,13 @@
 {
-    "version": "4.33.0.8907",
+    "version": "4.32.200.8919",
     "description": "网易UU远程，提供低延迟远程连接与云游戏体验。",
     "homepage": "https://uuyc.163.com/",
     "license": {
         "identifier": "Proprietary",
         "url": "https://uuyc.163.com/"
     },
-    "url": "https://a56.gdl.netease.com/UURemote_Setup_4.33.0.8907_0715193023_gwqd.exe?key1=b766b3003542315d8553538a36424614&key2=6a583e96&n=uuyc_4.33.0.exe",
-    "hash": "5e3cfe8cfdc6552c1fc26f1ad2c94df133ca20dc3c45c23155358c32ac9bf53e",
+    "url": "https://a56.gdl.netease.com/UURemote_Setup_4.32.200.8919_0716205104_gwqd.exe?key1=7cef2bb2023d33f6c49c64a411bf18ef&key2=6a5cf48c&n=uuyc_4.32.200.exe",
+    "hash": "eb007231250d254a4b714f66ba8055853c3eff59ef7f9d5c5fa3e3ac4046f172",
     "installer": {
         "script": [
             ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
