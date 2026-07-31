@@ -38,7 +38,7 @@ $registryPaths = @(
     "Registry::HKEY_USERS\$userSID\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\quark.exe"
     "Registry::HKEY_USERS\$userSID\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FB7670C2-7F99-426D-B687-21BB585A5C73}_is1"
 )
-Get-ChildItem -Path "Registry::HKEY_USERS\$userSID\SOFTWARE\Classes" -Filter "QuarkHTM*" -ErrorAction SilentlyContinue | ForEach-Object { $registryPaths += $_.PSPath }
+Get-ChildItem -Path "Registry::HKEY_USERS\$userSID\SOFTWARE\Classes\QuarkHTM*" -ErrorAction SilentlyContinue | ForEach-Object { $registryPaths += $_.PSPath }
 $registryValues = @(
     "Registry::HKEY_USERS\$userSID\SOFTWARE\Classes\.htm\OpenWithProgids|QuarkHTM.htm"
     "Registry::HKEY_USERS\$userSID\SOFTWARE\Classes\.html\OpenWithProgids|QuarkHTM.html"

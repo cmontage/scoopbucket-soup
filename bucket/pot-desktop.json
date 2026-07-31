@@ -22,11 +22,7 @@
     "post_uninstall": [
         "$bucket = $install.bucket",
         ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "$localPaths = @(",
-        "    \"$env:LOCALAPPDATA\\com.pot-app.desktop\"",
-        "    \"$env:APPDATA\\com.pot-app.desktop\"",
-        ")",
-        "Remove-AppData -LocalPaths $localPaths"
+        ". \"$bucketsdir\\$bucket\\scripts\\pot-desktop\\uninstall.ps1\""
     ],
     "bin": "pot.exe",
     "shortcuts": [
