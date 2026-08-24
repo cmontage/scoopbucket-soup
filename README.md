@@ -44,6 +44,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 | **lx-music** | An electron-based music player | [Link](https://github.com/lyswhut/lx-music-desktop) |
 | **m3u8-downloader** | M3U8下载器，支持多线程下载、断点续传、自动合并等功能 | [Link](https://github.com/HeiSir2014/M3U8-Downloader/) |
 | **navicat-premium-lite-cn** | Database administration and development tool | [Link](https://navicat.com.cn/products/navicat-premium-lite) |
+| **navicat170-premium-lite-cn** | Database administration and development tool. (Nologin) | [Link](https://navicat.com.cn/products/navicat-premium-lite) |
 | **neteasemusic** | 网易云音乐客户端，发现好音乐。 | [Link](https://music.163.com/) |
 | **piliplus** | 使用 Flutter 开发的 BiliBili 第三方客户端 | [Link](https://github.com/bggRGjQaUbCoE/PiliPlus) |
 | **pot-desktop** | 一个跨平台的划词翻译和OCR软件 | [Link](https://pot-app.com/) |
@@ -77,6 +78,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 ## ⚖️ 许可证 (License)
 
 本项目采用 [BSD 2-Clause License](LICENSE) 授权。
+
 
 
 
