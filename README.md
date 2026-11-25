@@ -46,6 +46,7 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 | **navicat-premium-lite-cn** | Database administration and development tool | [Link](https://navicat.com.cn/products/navicat-premium-lite) |
 | **navicat170-premium-lite-cn** | Database administration and development tool. (Nologin) | [Link](https://navicat.com.cn/products/navicat-premium-lite) |
 | **neteasemusic** | 网易云音乐客户端，发现好音乐。 | [Link](https://music.163.com/) |
+| **oopz** | Oopz致力于打造一个足够好用的游戏语音软件，让玩家可以享受纯粹流畅的开黑环境。 | [Link](https://oopz.cn/) |
 | **piliplus** | 使用 Flutter 开发的 BiliBili 第三方客户端 | [Link](https://github.com/bggRGjQaUbCoE/PiliPlus) |
 | **pot-desktop** | 一个跨平台的划词翻译和OCR软件 | [Link](https://pot-app.com/) |
 | **qqnt** | QQ Windows版，全新NT架构，轻松做自己。 | [Link](https://im.qq.com/pcqq/index.shtml) |
