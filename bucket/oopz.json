@@ -1,10 +1,10 @@
 {
-    "version": "1.4.6.2",
+    "version": "1.4.7.3",
     "description": "Oopz致力于打造一个足够好用的游戏语音软件，让玩家可以享受纯粹流畅的开黑环境。",
     "homepage": "https://oopz.cn/",
     "license": "Proprietary",
-    "url": "https://downloadcdn.oopz.cn/release/146/oopz_setup_v1.4.6.2.exe#/dl.7z",
-    "hash": "74a0c5a74fa65154f38372be54f16213311516c4cd004d2feb29b3bcc8eb5613",
+    "url": "https://downloadcdn.oopz.cn/release/147/oopz_setup_v1.4.7.3.exe#/dl.7z",
+    "hash": "347b1329d1c0b5725ad9ba0a8577ccd36e24e634047c1818dd682c40786af071",
     "shortcuts": [
         [
             "oopz.exe",
