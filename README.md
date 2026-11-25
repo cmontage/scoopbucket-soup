@@ -69,9 +69,9 @@ scoop bucket add soup 'https://gitee.com/cmontage/scoopbucket-soup'
 
 ## 📝 贡献内容 (Contributing)
 
-如果您想添加新软件：
-1. 请遵循 `bucket/` 目录下的 JSON 规范。
-2. 运行 `bin/formatjson.ps1` 格式化您的提交。
+如果您想添加新软件，请先阅读 [应用清单新建规则与注意事项 (CONTRIBUTING.md)](CONTRIBUTING.md)：
+1. 请遵循 `bucket/` 与 `scripts/` 目录下的清单与卸载脚本规范。
+2. 运行 `.\bin\formatjson.ps1 <app>` 格式化清单，并运行 `.\bin\sync-readme-app-list.ps1` 与 `.\bin\test.ps1` 完成校验。
 3. 提交 PR！
 
 ---
