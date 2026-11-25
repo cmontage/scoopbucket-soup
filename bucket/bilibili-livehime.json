@@ -1,5 +1,5 @@
 {
-    "version": "8.16.0.11349",
+    "version": "8.15.0.11311",
     "description": "哔哩哔哩直播姬",
     "homepage": "https://link.bilibili.com/p/eden/download#/web",
     "license": {
@@ -7,8 +7,8 @@
     },
     "architecture": {
         "64bit": {
-            "url": "https://dl.hdslb.com/bili/bililive/win/Livehime-Win-beta-8.16.0.11349-x64.exe",
-            "hash": "md5:60b3cfe8a17bea916a420d7116fd1fa4"
+            "url": "https://dl.hdslb.com/bili/bililive/win/Livehime-Win-beta-8.15.0.11311-x64.exe",
+            "hash": "md5:514fd76d7dd2ccd1656362a0c1c6685a"
         }
     },
     "depends": "innounp",
