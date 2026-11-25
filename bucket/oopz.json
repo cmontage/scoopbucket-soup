@@ -1,0 +1,52 @@
+{
+    "version": "1.4.6.2",
+    "description": "Oopz致力于打造一个足够好用的游戏语音软件，让玩家可以享受纯粹流畅的开黑环境。",
+    "homepage": "https://oopz.cn/",
+    "license": "Proprietary",
+    "url": "https://downloadcdn.oopz.cn/release/146/oopz_setup_v1.4.6.2.exe#/dl.7z",
+    "hash": "74a0c5a74fa65154f38372be54f16213311516c4cd004d2feb29b3bcc8eb5613",
+    "shortcuts": [
+        [
+            "oopz.exe",
+            "Oopz"
+        ]
+    ],
+    "bin": [
+        [
+            "oopz.exe",
+            "oopz"
+        ]
+    ],
+    "installer": {
+        "script": [
+            ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+            "Write-Host (\"`nPersisting $env:APPDATA\\oopz ... \") -NoNewline",
+            "New-PersistDirectory \"$env:APPDATA\\oopz\" \"$persist_dir\\AppData\" -Migrate",
+            "Expand-7zipArchive \"$dir\\`$TEMP\\oopz_nsis\\app.7z\" \"$dir\" -Removal",
+            "Remove-Item \"$dir\\`$*\", \"$dir\\uninstaller\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null"
+        ]
+    },
+    "persist": "sandbox",
+    "pre_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Require-Admin",
+        "Stop-App"
+    ],
+    "post_uninstall": [
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        ". \"$bucketsdir\\$bucket\\scripts\\oopz\\uninstall.ps1\""
+    ],
+    "checkver": {
+        "script": [
+            ". \"$pwd\\bin\\utils.ps1\"",
+            "Get-RedirectedUrl1st 'https://www.oopz.cn/download/xx'"
+        ],
+        "regex": "/release/(?<build>\\d+)/oopz_setup_v([\\d.]+)\\.exe"
+    },
+    "autoupdate": {
+        "url": "https://downloadcdn.oopz.cn/release/$matchBuild/oopz_setup_v$version.exe#/dl.7z"
+    },
+    "notes": "User data is persisted in \"$persist_dir\"."
+}
